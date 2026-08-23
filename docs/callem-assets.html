@@ -1,0 +1,316 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  CALLEM — BIBLIOTHÈQUE D'ASSETS PARTAGÉE
+  À copier INTÉGRALEMENT dans chaque proposition, juste après <body>.
+  Contient : les tokens de marque + le sprite SVG (logo Callem, 22 logos
+  partenaires, 18 icônes duotone propriétaires, 4 motifs de texture).
+  ═══════════════════════════════════════════════════════════════════════════
+  NOTE : les logos partenaires sont des reconstructions vectorielles destinées
+  à la maquette. Ils seront remplacés par les fichiers officiels des marques
+  avant mise en ligne.
+-->
+
+<style id="callem-brand">
+/* ═══ CHARTE CALLEM ═══════════════════════════════════════════════════════ */
+:root{
+  /* — Marque — */
+  --brand-indigo:#6772E5;      /* haut du dégradé du logo */
+  --brand-violet:#9F32FC;      /* bas du dégradé du logo */
+  --brand-500:#8B5CF6;         /* wordmark officiel */
+  --brand-400:#A78BFA;
+  --brand-300:#C4B5FD;
+  --brand-600:#7C3AED;
+  --brand-700:#6D28D9;
+  --brand-glow:#A855F7;        /* primaire du dashboard — halos, états live */
+
+  --grad-brand:linear-gradient(160deg,var(--brand-indigo) 0%,var(--brand-violet) 100%);
+  --grad-brand-h:linear-gradient(90deg,var(--brand-indigo) 0%,var(--brand-violet) 100%);
+  --grad-aurora:radial-gradient(60% 60% at 30% 20%,#6772E5 0%,transparent 70%),
+                radial-gradient(50% 50% at 75% 45%,#9F32FC 0%,transparent 70%),
+                radial-gradient(60% 60% at 50% 85%,#4F46E5 0%,transparent 70%);
+
+  /* — Accents secondaires (dashboard Callem) — */
+  --acc-orange:#EB6A0A;
+  --acc-blue:#0A93DE;
+  --acc-green:#3FCF8E;
+  --acc-red:#F0546A;
+
+  /* — Typographie — */
+  --font-display:"Outfit",ui-sans-serif,system-ui,sans-serif;
+  --font-sans:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",monospace;
+
+  /* — Courbes — */
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-both:cubic-bezier(.77,0,.175,1);
+  --ease-soft:cubic-bezier(.32,.72,0,1);
+}
+/* Chargement des polices : à placer dans le <head>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+*/
+
+/* ═══ CLASSES UTILITAIRES DE MARQUE ═══════════════════════════════════════ */
+.c-logo{display:inline-flex;align-items:center;gap:.55rem}
+.c-logo svg{display:block}
+.c-mark{width:2rem;height:2rem;border-radius:.6rem}
+.c-grad-text{background:var(--grad-brand-h);-webkit-background-clip:text;background-clip:text;color:transparent}
+.c-glow{filter:drop-shadow(0 0 24px color-mix(in oklab,var(--brand-glow) 45%,transparent))}
+
+/* Logos partenaires : gris au repos, couleur au survol (device Gladia/Retell) */
+.plogo{height:1.5rem;width:auto;opacity:.55;filter:grayscale(1);
+  transition:opacity .4s var(--ease-out),filter .4s var(--ease-out)}
+.plogo:hover,.marquee:hover .plogo{opacity:1;filter:grayscale(0)}
+
+/* Icône duotone : le trait prend currentColor, le remplissage prend l'accent */
+.duo{width:1.5rem;height:1.5rem}
+.duo .duo-fill{fill:var(--brand-500);opacity:.22}
+.duo .duo-line{fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+</style>
+
+<!-- ═══ SPRITE SVG ═══════════════════════════════════════════════════════ -->
+<svg id="callem-sprite" aria-hidden="true" focusable="false"
+     style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+<defs>
+
+  <!-- Dégradé officiel du logo Callem -->
+  <linearGradient id="cg-brand" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#6772E5"/><stop offset="1" stop-color="#9F32FC"/>
+  </linearGradient>
+  <linearGradient id="cg-brand-h" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#6772E5"/><stop offset="1" stop-color="#9F32FC"/>
+  </linearGradient>
+  <linearGradient id="cg-mistral" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FFD800"/><stop offset=".25" stop-color="#FFAF00"/>
+    <stop offset=".5" stop-color="#FF8205"/><stop offset=".75" stop-color="#FA500F"/>
+    <stop offset="1" stop-color="#E10500"/>
+  </linearGradient>
+
+  <!-- Grain de film (Retell : opacity .25, mix-blend-mode screen) -->
+  <filter id="cf-grain"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <!-- Flou de halo -->
+  <filter id="cf-bloom" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="18" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <!-- ─── LOGO CALLEM — marque seule (squircle + C) ─────────────────────── -->
+  <symbol id="callem-mark" viewBox="0 0 127 127">
+    <path d="M3 62.805C3 36.219 3 22.926 11.259 14.666 19.519 6.407 32.812 6.407 59.398 6.407h4.7c26.587 0 39.88 0 48.139 8.259C120.496 22.926 120.496 36.219 120.496 62.805v4.7c0 26.587 0 39.88-8.259 48.139-8.259 8.259-21.552 8.259-48.139 8.259h-4.7c-26.586 0-39.879 0-48.139-8.259C3 107.385 3 94.092 3 67.505v-4.7Z" fill="url(#cg-brand)"/>
+    <path d="M64.49 92.019c4.203 0 7.82-.689 10.852-2.067 3.031-1.447 6.201-3.721 9.508-6.822l7.855 8.062c-7.648 8.475-16.95 12.712-27.905 12.712-10.887 0-19.947-3.514-27.182-10.542-7.166-7.028-10.749-15.916-10.749-26.665 0-10.749 3.652-19.706 10.956-26.872 7.372-7.166 16.64-10.749 27.802-10.749 11.231 0 20.602 4.134 28.112 12.403l-7.751 8.475c-3.445-3.307-6.718-5.616-9.819-6.925-3.031-1.309-6.614-1.963-10.748-1.963-7.304 0-13.436 2.377-18.397 7.131-4.961 4.686-7.442 10.715-7.442 18.087 0 7.304 2.446 13.436 7.338 18.397 4.961 4.892 10.818 7.338 17.57 7.338Z" fill="#fff"/>
+  </symbol>
+
+  <!-- ─── LOGO CALLEM — verrou complet (marque + wordmark) ──────────────── -->
+  <symbol id="callem-lockup" viewBox="0 0 586 127">
+    <path d="M3 62.805C3 36.219 3 22.926 11.259 14.666 19.519 6.407 32.812 6.407 59.398 6.407h4.7c26.587 0 39.88 0 48.139 8.259C120.496 22.926 120.496 36.219 120.496 62.805v4.7c0 26.587 0 39.88-8.259 48.139-8.259 8.259-21.552 8.259-48.139 8.259h-4.7c-26.586 0-39.879 0-48.139-8.259C3 107.385 3 94.092 3 67.505v-4.7Z" fill="url(#cg-brand)"/>
+    <path d="M64.49 92.019c4.203 0 7.82-.689 10.852-2.067 3.031-1.447 6.201-3.721 9.508-6.822l7.855 8.062c-7.648 8.475-16.95 12.712-27.905 12.712-10.887 0-19.947-3.514-27.182-10.542-7.166-7.028-10.749-15.916-10.749-26.665 0-10.749 3.652-19.706 10.956-26.872 7.372-7.166 16.64-10.749 27.802-10.749 11.231 0 20.602 4.134 28.112 12.403l-7.751 8.475c-3.445-3.307-6.718-5.616-9.819-6.925-3.031-1.309-6.614-1.963-10.748-1.963-7.304 0-13.436 2.377-18.397 7.131-4.961 4.686-7.442 10.715-7.442 18.087 0 7.304 2.446 13.436 7.338 18.397 4.961 4.892 10.818 7.338 17.57 7.338Z" fill="#fff"/>
+    <path class="callem-word" d="M182.52 86.835c3.863 0 7.188-.633 9.975-1.9 2.787-1.33 5.7-3.42 8.74-6.27l7.22 7.41c-7.03 7.79-15.58 11.685-25.65 11.685-10.007 0-18.335-3.23-24.985-9.69-6.587-6.46-9.88-14.63-9.88-24.51 0-9.88 3.357-18.113 10.07-24.7 6.777-6.587 15.295-9.88 25.555-9.88 10.323 0 18.937 3.8 25.84 11.4l-7.125 7.79c-3.167-3.04-6.175-5.162-9.025-6.365-2.787-1.203-6.08-1.805-9.88-1.805-6.713 0-12.35 2.185-16.91 6.555-4.56 4.307-6.84 9.848-6.84 16.625 0 6.713 2.248 12.35 6.745 16.91 4.56 4.497 9.943 6.745 16.15 6.745Zm77.171 10.165h-9.69v-6.745c-4.18 5.003-9.785 7.505-16.815 7.505-5.256 0-9.626-1.488-13.11-4.465-3.42-2.977-5.13-6.935-5.13-11.875 0-5.003 1.837-8.74 5.51-11.21 3.674-2.47 8.645-3.705 14.915-3.705h13.775v-1.9c0-6.713-3.736-10.07-11.21-10.07-4.686 0-9.563 1.71-14.63 5.13l-4.75-6.65c6.144-4.877 13.11-7.315 20.9-7.315 5.954 0 10.799 1.52 14.535 4.56 3.8 2.977 5.7 7.695 5.7 14.155V97Zm-10.64-18.81v-4.275h-11.97c-7.663 0-11.495 2.407-11.495 7.22 0 2.47.95 4.37 2.85 5.7 1.9 1.267 4.529 1.9 7.885 1.9 3.42 0 6.397-.95 8.93-2.85 2.534-1.9 3.8-4.465 3.8-7.695ZM283.243 97h-10.64V26.51h10.64V97Zm24.169 0h-10.64V26.51h10.64V97Zm60.555-20.615h-39.615c.253 3.673 1.931 6.65 5.035 8.93 3.103 2.217 6.65 3.325 10.64 3.325 6.333 0 11.146-1.995 14.44-5.985l6.08 6.65c-5.447 5.637-12.54 8.455-21.28 8.455-7.094 0-13.142-2.343-18.145-7.03-4.94-4.75-7.41-11.083-7.41-19 0-7.98 2.533-14.313 7.6-19 5.066-4.687 11.02-7.03 17.86-7.03 6.903 0 12.761 2.09 17.575 6.27 4.813 4.117 7.22 9.817 7.22 17.1v7.315Zm-39.615-8.36h28.975c0-4.243-1.33-7.505-3.99-9.785-2.66-2.28-5.954-3.42-9.88-3.42-3.864 0-7.347 1.203-10.45 3.61-3.104 2.343-4.655 5.542-4.655 9.595Zm60.055 1.615V97h-10.64V46.46h10.64v9.215c1.52-3.103 3.8-5.542 6.84-7.315 3.104-1.773 6.429-2.66 9.975-2.66 7.98 0 13.395 3.293 16.245 9.88 5.004-6.587 11.242-9.88 18.715-9.88 5.7 0 10.292 1.742 13.775 5.225 3.547 3.483 5.32 8.518 5.32 15.105V97h-10.64V69.26c0-9.31-3.863-13.965-11.59-13.965-3.61 0-6.776 1.172-9.5 3.515-2.66 2.28-4.053 5.637-4.18 10.07V97h-10.64V69.26c0-4.813-.855-8.328-2.565-10.545-1.71-2.28-4.401-3.42-8.075-3.42-3.673 0-6.871 1.235-9.595 3.705-2.723 2.407-4.085 5.953-4.085 10.64Zm84.329 26.03c-1.33-1.393-1.995-3.072-1.995-5.035 0-1.963.665-3.61 1.995-4.94 1.393-1.393 3.072-2.09 5.035-2.09s3.642.697 5.035 2.09c1.393 1.33 2.09 2.977 2.09 4.94s-.697 3.642-2.09 5.035c-1.393 1.393-3.072 2.09-5.035 2.09s-3.642-.697-5.035-2.09ZM537.837 97h-9.69v-6.745c-4.18 5.003-9.785 7.505-16.815 7.505-5.257 0-9.627-1.488-13.11-4.465-3.42-2.977-5.13-6.935-5.13-11.875 0-5.003 1.837-8.74 5.51-11.21 3.673-2.47 8.645-3.705 14.915-3.705h13.775v-1.9c0-6.713-3.737-10.07-11.21-10.07-4.687 0-9.563 1.71-14.63 5.13l-4.75-6.65c6.143-4.877 13.11-7.315 20.9-7.315 5.953 0 10.798 1.52 14.535 4.56 3.8 2.977 5.7 7.695 5.7 14.155V97Zm-10.64-18.81v-4.275h-11.97c-7.663 0-11.495 2.407-11.495 7.22 0 2.47.95 4.37 2.85 5.7 1.9 1.267 4.528 1.9 7.885 1.9 3.42 0 6.397-.95 8.93-2.85 2.533-1.9 3.8-4.465 3.8-7.695ZM561.389 97h-10.64V46.46h10.64V97Zm-9.975-60.61c-1.33-1.33-1.995-2.913-1.995-4.75 0-1.837.665-3.42 1.995-4.75 1.33-1.33 2.913-1.995 4.75-1.995 1.837 0 3.42.665 4.75 1.995 1.33 1.33 1.995 2.913 1.995 4.75 0 1.837-.665 3.42-1.995 4.75-1.33 1.33-2.913 1.995-4.75 1.995-1.837 0-3.42-.665-4.75-1.995Z" fill="#8B5CF6"/>
+  </symbol>
+
+  <!-- ─── LOGOS PARTENAIRES ─────────────────────────────────────────────── -->
+
+  <symbol id="lg-openai" viewBox="0 0 120 24">
+    <path d="M22.28 9.82a5.93 5.93 0 0 0-.51-4.87 6 6 0 0 0-6.46-2.88A5.93 5.93 0 0 0 10.85 0a6 6 0 0 0-5.72 4.15 5.93 5.93 0 0 0-3.97 2.87 6 6 0 0 0 .74 7.03 5.93 5.93 0 0 0 .51 4.87 6 6 0 0 0 6.46 2.88A5.93 5.93 0 0 0 13.34 24a6 6 0 0 0 5.72-4.15 5.93 5.93 0 0 0 3.97-2.87 6 6 0 0 0-.75-7.16Zm-8.94 12.5a4.45 4.45 0 0 1-2.86-1.03l.14-.08 4.75-2.74a.78.78 0 0 0 .39-.68v-6.7l2.01 1.16a.07.07 0 0 1 .04.05v5.55a4.47 4.47 0 0 1-4.47 4.47ZM3.73 18.2a4.44 4.44 0 0 1-.53-2.99l.14.09 4.75 2.74a.77.77 0 0 0 .78 0l5.8-3.35v2.32a.07.07 0 0 1-.03.06L9.84 19.8a4.47 4.47 0 0 1-6.1-1.63ZM2.48 7.87a4.44 4.44 0 0 1 2.33-1.96v5.65a.75.75 0 0 0 .38.66l5.79 3.34-2.01 1.17a.07.07 0 0 1-.07 0L4.1 13.96a4.47 4.47 0 0 1-1.63-6.1Zm16.5 3.84L13.2 8.35l2.01-1.16a.07.07 0 0 1 .07 0l4.8 2.78a4.47 4.47 0 0 1-.68 8.05v-5.65a.78.78 0 0 0-.4-.66Zm2-3.01-.14-.09-4.74-2.76a.78.78 0 0 0-.79 0L9.51 9.2V6.88a.07.07 0 0 1 .03-.06l4.8-2.77a4.47 4.47 0 0 1 6.63 4.62ZM8.41 12.82 6.4 11.67a.07.07 0 0 1-.04-.06V6.07a4.47 4.47 0 0 1 7.33-3.43l-.14.08-4.75 2.74a.78.78 0 0 0-.39.68v6.68Zm1.09-2.35 2.58-1.49 2.59 1.49v2.98l-2.58 1.49-2.59-1.49v-2.98Z" fill="currentColor"/>
+    <text x="30" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">OpenAI</text>
+  </symbol>
+
+  <symbol id="lg-anthropic" viewBox="0 0 128 24">
+    <path d="M13.83 4h-3.66L4 20h3.4l1.26-3.4h6.7L16.6 20H20L13.83 4Zm-4.1 9.72 2.27-6.1 2.28 6.1H9.73ZM5.9 4H2.5L8.66 20h3.4L5.9 4Z" fill="currentColor"/>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Anthropic</text>
+  </symbol>
+
+  <symbol id="lg-mistral" viewBox="0 0 118 24">
+    <g class="lg-color">
+      <rect x="0"  y="2"  width="4.2" height="4.2" fill="#FFD800"/><rect x="12.6" y="2"  width="4.2" height="4.2" fill="#FFD800"/>
+      <rect x="0"  y="6.6" width="4.2" height="4.2" fill="#FFAF00"/><rect x="4.2" y="6.6" width="4.2" height="4.2" fill="#FFAF00"/>
+      <rect x="12.6" y="6.6" width="4.2" height="4.2" fill="#FFAF00"/><rect x="16.8" y="6.6" width="4.2" height="4.2" fill="#FFAF00"/>
+      <rect x="0"  y="11.2" width="4.2" height="4.2" fill="#FF8205"/><rect x="8.4" y="11.2" width="4.2" height="4.2" fill="#FF8205"/>
+      <rect x="16.8" y="11.2" width="4.2" height="4.2" fill="#FF8205"/>
+      <rect x="0"  y="15.8" width="4.2" height="4.2" fill="#FA500F"/><rect x="8.4" y="15.8" width="4.2" height="4.2" fill="#FA500F"/>
+      <rect x="16.8" y="15.8" width="4.2" height="4.2" fill="#FA500F"/>
+      <rect x="0"  y="20.4" width="4.2" height="3.2" fill="#E10500"/><rect x="8.4" y="20.4" width="4.2" height="3.2" fill="#E10500"/>
+      <rect x="16.8" y="20.4" width="4.2" height="3.2" fill="#E10500"/>
+    </g>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Mistral AI</text>
+  </symbol>
+
+  <symbol id="lg-googlecloud" viewBox="0 0 150 24">
+    <path d="M15.2 8.1h.7l2-2 .1-.85A8.99 8.99 0 0 0 3.35 9.63a1.1 1.1 0 0 1 .7-.04l4-.66s.2-.34.31-.32a4.99 4.99 0 0 1 6.84-.5Z" fill="#EA4335"/>
+    <path d="M20.5 9.63a9 9 0 0 0-2.72-4.38L14.96 8.07a4.99 4.99 0 0 1 1.83 3.96v.5a2.5 2.5 0 0 1 0 5h-5l-.5.5v3l.5.5h5a6.5 6.5 0 0 0 3.7-11.9Z" fill="#4285F4"/>
+    <path d="M6.79 21.5h5v-4h-5a2.48 2.48 0 0 1-1.03-.22l-.7.21-2.02 2-.18.7a6.46 6.46 0 0 0 3.93 1.31Z" fill="#34A853"/>
+    <path d="M6.79 8.5A6.5 6.5 0 0 0 2.86 20.2l2.9-2.9a2.5 2.5 0 1 1 3.31-3.3l2.9-2.9A6.49 6.49 0 0 0 6.79 8.5Z" fill="#FBBC05"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Google Cloud</text>
+  </symbol>
+
+  <symbol id="lg-elevenlabs" viewBox="0 0 130 24">
+    <rect x="2" y="3" width="4" height="18" rx="1" fill="currentColor"/>
+    <rect x="10" y="3" width="4" height="18" rx="1" fill="currentColor"/>
+    <text x="22" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">ElevenLabs</text>
+  </symbol>
+
+  <symbol id="lg-azure" viewBox="0 0 120 24">
+    <path d="M9.6 3h6.1l-6.34 18.8a1 1 0 0 1-.95.68H3.66a1 1 0 0 1-.95-1.32L8.65 3.68A1 1 0 0 1 9.6 3Z" fill="#0078D4"/>
+    <path d="m17.3 15.3-9.42.02L13.1 21h8.24a1 1 0 0 0 .82-1.57L17.3 15.3Z" fill="#0078D4" opacity=".7"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Azure</text>
+  </symbol>
+
+  <symbol id="lg-salesforce" viewBox="0 0 136 24">
+    <path d="M10.1 6.4a4.3 4.3 0 0 1 7.15 1.24 5.2 5.2 0 0 1 6.3 4.66 4.6 4.6 0 0 1-4.5 5.2H8.6a5 5 0 0 1-1.5-9.78 4.3 4.3 0 0 1 3-1.32Z" fill="#00A1E0"/>
+    <text x="30" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Salesforce</text>
+  </symbol>
+
+  <symbol id="lg-hubspot" viewBox="0 0 126 24">
+    <path d="M16.9 9.1V6.5a2 2 0 1 0-2.1 0v2.62a5.9 5.9 0 0 0-2.7 1.19L5.7 5.72a2.24 2.24 0 1 0-1.03 1.65l6.3 4.5a5.9 5.9 0 0 0 .1 6.5l-1.9 1.9a1.9 1.9 0 1 0 1.4 1.42l1.9-1.9a5.9 5.9 0 1 0 4.43-10.7Zm-1.05 8.8a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="#FF7A59"/>
+    <text x="30" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">HubSpot</text>
+  </symbol>
+
+  <symbol id="lg-twilio" viewBox="0 0 110 24">
+    <path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22Zm0 19.1a8.1 8.1 0 1 1 0-16.2 8.1 8.1 0 0 1 0 16.2Z" fill="#F22F46"/>
+    <circle cx="9.3" cy="9.3" r="2.35" fill="#F22F46"/><circle cx="14.7" cy="9.3" r="2.35" fill="#F22F46"/>
+    <circle cx="9.3" cy="14.7" r="2.35" fill="#F22F46"/><circle cx="14.7" cy="14.7" r="2.35" fill="#F22F46"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Twilio</text>
+  </symbol>
+
+  <symbol id="lg-zapier" viewBox="0 0 108 24">
+    <path d="M14.7 12a8.4 8.4 0 0 1-.5 2.7 8.4 8.4 0 0 1-2.7.5 8.4 8.4 0 0 1-2.7-.5A8.4 8.4 0 0 1 8.3 12c0-.94.17-1.84.5-2.7A8.4 8.4 0 0 1 11.5 8.8c.94 0 1.84.17 2.7.5.32.86.5 1.76.5 2.7Zm8.8-1.7h-6.3l4.45-4.46a11.7 11.7 0 0 0-1.7-2.1 11.7 11.7 0 0 0-2.1-1.7L13.4 6.5V.2A11.8 11.8 0 0 0 11.5 0c-.64 0-1.27.07-1.88.2v6.3L5.16 2.04c-.76.5-1.46 1.07-2.1 1.71h-.01c-.64.63-1.2 1.34-1.7 2.1L5.8 10.3H-.5c0 .01-.2 1.24-.2 1.89v.01c0 .64.07 1.27.2 1.88h6.3l-4.45 4.46c.5.76 1.07 1.46 1.71 2.1a11.8 11.8 0 0 0 2.1 1.7l4.46-4.45v6.3c.61.12 1.24.19 1.88.19h.02c.64 0 1.27-.07 1.88-.2v-6.3l4.46 4.46a11.79 11.79 0 0 0 3.8-3.8l-4.45-4.46h6.3c.12-.61.19-1.24.19-1.88v-.02c0-.64-.07-1.27-.2-1.88Z" transform="translate(1)" fill="#FF4F00"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Zapier</text>
+  </symbol>
+
+  <symbol id="lg-calcom" viewBox="0 0 106 24">
+    <rect x="1" y="4" width="18" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M7.6 10.2a3.3 3.3 0 1 0 0 5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="14" cy="15" r="1.4" fill="currentColor"/>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Cal.com</text>
+  </symbol>
+
+  <symbol id="lg-genesys" viewBox="0 0 116 24">
+    <path d="M12 2a10 10 0 1 0 9.2 6.1l-2.6 1.1A7.2 7.2 0 1 1 12 4.8V2Z" fill="#FF4F1F"/>
+    <path d="M12 9.4h9.8v2.9H12z" fill="#FF4F1F"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Genesys</text>
+  </symbol>
+
+  <symbol id="lg-zendesk" viewBox="0 0 116 24">
+    <path d="M10.6 6.6V21H0L10.6 6.6ZM0 3h10.6a5.3 5.3 0 0 1-10.6 0Z" fill="#03363D"/>
+    <path d="M12.6 21a5.3 5.3 0 0 1 10.6 0H12.6Zm10.6-3.6V3H12.6l10.6 14.4Z" fill="#03363D"/>
+    <text x="30" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Zendesk</text>
+  </symbol>
+
+  <symbol id="lg-servicenow" viewBox="0 0 140 24">
+    <circle cx="11" cy="12" r="9" fill="#62D84E"/>
+    <path d="M6.6 17.4a6.4 6.4 0 1 1 8.8 0 7.6 7.6 0 0 0-8.8 0Z" fill="#0B2E13"/>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">ServiceNow</text>
+  </symbol>
+
+  <symbol id="lg-pipedrive" viewBox="0 0 122 24">
+    <path d="M11.4 3c-2.1 0-3.6.9-4.4 2.2V3.3H2.4v20.4h5V17c.8 1.1 2.2 1.9 4.1 1.9 4 0 6.9-3.2 6.9-8s-2.9-8-7-8Zm-1.2 11.6c-2 0-3.4-1.5-3.4-3.6s1.4-3.6 3.4-3.6c2.1 0 3.4 1.5 3.4 3.6s-1.3 3.6-3.4 3.6Z" fill="#017737"/>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Pipedrive</text>
+  </symbol>
+
+  <symbol id="lg-zoho" viewBox="0 0 110 24">
+    <rect x="1" y="5" width="6" height="14" rx="1.5" fill="#E42527"/>
+    <rect x="8.5" y="5" width="6" height="14" rx="1.5" fill="#F9B21D"/>
+    <rect x="16" y="5" width="6" height="14" rx="1.5" fill="#089949"/>
+    <text x="28" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Zoho</text>
+  </symbol>
+
+  <symbol id="lg-attio" viewBox="0 0 96 24">
+    <path d="M11 3 2 21h4l1.8-3.8h6.4L16 21h4L11 3Zm-1.9 10.6L11 9.4l1.9 4.2H9.1Z" fill="currentColor"/>
+    <text x="24" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Attio</text>
+  </symbol>
+
+  <symbol id="lg-close" viewBox="0 0 100 24">
+    <circle cx="11" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M14.4 9.2a4.4 4.4 0 1 0 0 5.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Close</text>
+  </symbol>
+
+  <symbol id="lg-nice" viewBox="0 0 118 24">
+    <path d="M2 4h4l6 9V4h4v16h-4l-6-9v9H2V4Z" fill="currentColor"/>
+    <text x="24" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">NICE CXone</text>
+  </symbol>
+
+  <symbol id="lg-five9" viewBox="0 0 98 24">
+    <path d="M3 4h11v3.4H6.6v3.2h6.6V14H6.6v6H3V4Z" fill="currentColor"/>
+    <text x="20" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Five9</text>
+  </symbol>
+
+  <symbol id="lg-talkdesk" viewBox="0 0 118 24">
+    <path d="M4 4h14v3.4h-5.2V20H9.2V7.4H4V4Z" fill="currentColor"/>
+    <text x="24" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Talkdesk</text>
+  </symbol>
+
+  <symbol id="lg-cisco" viewBox="0 0 102 24">
+    <g fill="#1BA0D7">
+      <rect x="1"  y="10" width="2.2" height="5" rx="1.1"/><rect x="5.4" y="7"  width="2.2" height="11" rx="1.1"/>
+      <rect x="9.8" y="4"  width="2.2" height="17" rx="1.1"/><rect x="14.2" y="7" width="2.2" height="11" rx="1.1"/>
+      <rect x="18.6" y="10" width="2.2" height="5" rx="1.1"/>
+    </g>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Cisco</text>
+  </symbol>
+
+  <symbol id="lg-slack" viewBox="0 0 100 24">
+    <g><path d="M6.1 14.6a2.1 2.1 0 1 1-2.1-2.1h2.1v2.1Zm1.06 0a2.1 2.1 0 0 1 4.2 0v5.3a2.1 2.1 0 0 1-4.2 0v-5.3Z" fill="#E01E5A"/>
+    <path d="M9.26 6.1a2.1 2.1 0 1 1 2.1-2.1v2.1h-2.1Zm0 1.06a2.1 2.1 0 0 1 0 4.2H3.94a2.1 2.1 0 0 1 0-4.2h5.32Z" fill="#36C5F0"/>
+    <path d="M17.7 9.26a2.1 2.1 0 1 1 2.1 2.1h-2.1v-2.1Zm-1.06 0a2.1 2.1 0 0 1-4.2 0V3.94a2.1 2.1 0 1 1 4.2 0v5.32Z" fill="#2EB67D"/>
+    <path d="M14.54 17.7a2.1 2.1 0 1 1-2.1 2.1v-2.1h2.1Zm0-1.06a2.1 2.1 0 0 1 0-4.2h5.32a2.1 2.1 0 0 1 0 4.2h-5.32Z" fill="#ECB22E"/></g>
+    <text x="26" y="17" font-family="Inter,system-ui,sans-serif" font-size="14.5" font-weight="600" letter-spacing="-.02em" fill="currentColor">Slack</text>
+  </symbol>
+
+  <!-- ─── ICÔNES DUOTONE PROPRIÉTAIRES (24×24) ──────────────────────────── -->
+  <symbol id="ic-agent" viewBox="0 0 24 24"><rect class="duo-fill" x="3" y="7" width="18" height="12" rx="4"/><rect class="duo-line" x="3" y="7" width="18" height="12" rx="4"/><path class="duo-line" d="M12 3v4M8.5 12.5h.01M15.5 12.5h.01M9 16h6"/></symbol>
+  <symbol id="ic-kb" viewBox="0 0 24 24"><path class="duo-fill" d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path class="duo-line" d="M4 19V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2Zm4-13h6M8 10h6"/></symbol>
+  <symbol id="ic-tools" viewBox="0 0 24 24"><circle class="duo-fill" cx="12" cy="12" r="8"/><path class="duo-line" d="m14.6 6.4 3 3-8.2 8.2-3.6.6.6-3.6 8.2-8.2ZM4 20h8"/></symbol>
+  <symbol id="ic-workflow" viewBox="0 0 24 24"><rect class="duo-fill" x="3" y="3" width="7" height="6" rx="2"/><rect class="duo-line" x="3" y="3" width="7" height="6" rx="2"/><rect class="duo-line" x="14" y="15" width="7" height="6" rx="2"/><path class="duo-line" d="M6.5 9v6a3 3 0 0 0 3 3H14"/></symbol>
+  <symbol id="ic-test" viewBox="0 0 24 24"><path class="duo-fill" d="M9 3h6v6l4.5 9a2 2 0 0 1-1.8 3H6.3a2 2 0 0 1-1.8-3L9 9V3Z"/><path class="duo-line" d="M9 3h6M10 3v6l-4.5 9a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9V3M7 16h10"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24"><path class="duo-fill" d="M4 6a2 2 0 0 1 2-2h2l2 5-2 1a10 10 0 0 0 4 4l1-2 5 2v2a2 2 0 0 1-2 2A16 16 0 0 1 4 6Z"/><path class="duo-line" d="M4 6a2 2 0 0 1 2-2h2l2 5-2 1a10 10 0 0 0 4 4l1-2 5 2v2a2 2 0 0 1-2 2A16 16 0 0 1 4 6Z"/></symbol>
+  <symbol id="ic-sip" viewBox="0 0 24 24"><circle class="duo-fill" cx="12" cy="12" r="8"/><path class="duo-line" d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path class="duo-fill" d="M4 5h16v11H9l-5 4V5Z"/><path class="duo-line" d="M4 5h16v11H9l-5 4V5Zm4 5h8"/></symbol>
+  <symbol id="ic-campaign" viewBox="0 0 24 24"><path class="duo-fill" d="M4 9h4l9-5v16l-9-5H4V9Z"/><path class="duo-line" d="M4 9h4l9-5v16l-9-5H4V9Zm4 0v6m12-8a5 5 0 0 1 0 10"/></symbol>
+  <symbol id="ic-live" viewBox="0 0 24 24"><circle class="duo-fill" cx="12" cy="12" r="4"/><path class="duo-line" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-5.7-2.3a8 8 0 0 0 0 11.4m11.4 0a8 8 0 0 0 0-11.4"/></symbol>
+  <symbol id="ic-analytics" viewBox="0 0 24 24"><path class="duo-fill" d="M4 14h4v6H4zM10 8h4v12h-4zM16 11h4v9h-4z"/><path class="duo-line" d="M4 20h16M6 14v6M12 8v12M18 11v9M5 9l4-4 4 3 6-5"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path class="duo-fill" d="M12 3a6 6 0 0 1 6 6v5l2 3H4l2-3V9a6 6 0 0 1 6-6Z"/><path class="duo-line" d="M12 3a6 6 0 0 1 6 6v5l2 3H4l2-3V9a6 6 0 0 1 6-6Zm-2 17h4"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path class="duo-fill" d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/><path class="duo-line" d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Zm-3 9 2 2 4-4"/></symbol>
+  <symbol id="ic-transfer" viewBox="0 0 24 24"><circle class="duo-fill" cx="7" cy="8" r="3"/><circle class="duo-fill" cx="17" cy="16" r="3"/><path class="duo-line" d="M7 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm10 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM4 20a3 3 0 0 1 6 0m4-12h6m0 0-2.5-2.5M20 8l-2.5 2.5"/></symbol>
+  <symbol id="ic-eu" viewBox="0 0 24 24"><circle class="duo-fill" cx="12" cy="12" r="9"/><path class="duo-line" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 0c-3 3-3 15 0 18M3 12h18"/></symbol>
+  <symbol id="ic-leaf" viewBox="0 0 24 24"><path class="duo-fill" d="M20 4c0 9-5 13-11 13a5 5 0 0 1 0-10c5 0 6-3 11-3Z"/><path class="duo-line" d="M20 4c0 9-5 13-11 13a5 5 0 0 1 0-10c5 0 6-3 11-3ZM4 20c3-6 7-9 12-11"/></symbol>
+  <symbol id="ic-api" viewBox="0 0 24 24"><rect class="duo-fill" x="3" y="5" width="18" height="14" rx="3"/><path class="duo-line" d="M3 5h18v14H3V5Zm5.5 5L6 12l2.5 2m7-4 2.5 2-2.5 2M13 9l-2 6"/></symbol>
+  <symbol id="ic-lock" viewBox="0 0 24 24"><rect class="duo-fill" x="4" y="10" width="16" height="11" rx="3"/><path class="duo-line" d="M4 10h16v11H4V10Zm4 0V7a4 4 0 0 1 8 0v3m-4 4v3"/></symbol>
+
+  <!-- ─── MOTIFS DE TEXTURE ─────────────────────────────────────────────── -->
+  <pattern id="pt-dots" width="14.3" height="11.2" patternUnits="userSpaceOnUse">
+    <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" opacity=".22"/>
+  </pattern>
+  <pattern id="pt-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+    <path d="M48 0H0v48" fill="none" stroke="currentColor" stroke-width="1" opacity=".08"/>
+  </pattern>
+</defs>
+</svg>
+
+<!--
+  ═══ MODE D'EMPLOI ════════════════════════════════════════════════════════
+
+  Logo Callem (nav) :
+    <a class="c-logo" href="/"><svg class="c-mark" viewBox="0 0 127 127"><use href="#callem-mark"/></svg>
+       <span class="c-word">Callem</span></a>
+    — ou le verrou complet : <svg viewBox="0 0 586 127" style="height:1.75rem"><use href="#callem-lockup"/></svg>
+    — le wordmark du verrou est en #8B5CF6 ; pour du blanc sur fond sombre,
+      surcharger : svg .callem-word{fill:#fff}
+
+  Logo partenaire :
+    <svg class="plogo" viewBox="0 0 118 24"><use href="#lg-mistral"/></svg>
+    — respecter le viewBox du symbole (largeurs variables, hauteur 24).
+    Ids : lg-openai lg-anthropic lg-mistral lg-googlecloud lg-elevenlabs lg-azure
+          lg-salesforce lg-hubspot lg-twilio lg-zapier lg-calcom lg-genesys
+          lg-zendesk lg-servicenow lg-pipedrive lg-zoho lg-attio lg-close
+          lg-nice lg-five9 lg-talkdesk lg-cisco lg-slack
+
+  Icône duotone :
+    <svg class="duo" viewBox="0 0 24 24"><use href="#ic-agent"/></svg>
+    Ids : ic-agent ic-kb ic-tools ic-workflow ic-test ic-phone ic-sip ic-chat
+          ic-campaign ic-live ic-analytics ic-alert ic-shield ic-transfer
+          ic-eu ic-leaf ic-api ic-lock
+
+  Texture :
+    <rect width="100%" height="100%" fill="url(#pt-dots)"/>   (dans un SVG, color: hérité)
+    filter="url(#cf-bloom)" pour un halo, filter="url(#cf-grain)" pour du grain.
+-->
