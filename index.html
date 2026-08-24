@@ -3360,7 +3360,8 @@ function onTheme(fn){ themeSubs.push(fn); }
   for (var i=0;i<N;i++){
     P[i] = { ex:0, ey:0, px:0, py:0, cx:0, cy:0, wx:0, wy:0, tx:0, ty:0,
              u: i/N, band:(rnd()*2-1), size:.8 + rnd()*1.35, tw:rnd()*Math.PI*2,
-             sp:.72 + rnd()*.5, acc:rnd(), paris:false, fill:false, x:0, y:0 };
+             sp:.72 + rnd()*.5, acc:rnd(), paris:false, fill:false, x:0, y:0,
+             dep: .35 + rnd()*.65 };   /* profondeur : parallaxe et taille */
   }
   /* les dernières particules forment le nœud Paris — elles s’allument en dernier */
   for (i = N - NPARIS; i < N; i++) P[i].paris = true;
@@ -3428,6 +3429,31 @@ function onTheme(fn){ themeSubs.push(fn); }
   }
 
   /* — rendu — */
+  /* — pointeur : écartement local et parallaxe de profondeur (phase figée) — */
+  var FINE = matchMedia('(pointer: fine)').matches;
+  var mAim = {x:0, y:0, on:false}, mNow = {x:0, y:0, on:0};
+  if (FINE){
+    cv.parentNode.addEventListener('pointermove', function(e){
+      var r = cv.getBoundingClientRect();
+      mAim.x = e.clientX - r.left; mAim.y = e.clientY - r.top; mAim.on = true;
+    }, {passive:true});
+    cv.parentNode.addEventListener('pointerleave', function(){ mAim.on = false; }, {passive:true});
+  }
+
+  /* — impulsions de données : tout part de Paris — */
+  var pulses = [], nextPulse = 0;
+  function spawnPulse(ms){
+    if (!outline.length) return;
+    for (var g=0; g<40; g++){
+      var o = outline[(rnd()*outline.length)|0];
+      var tx = o[0]*S + OX, ty = o[1]*S + OY;
+      if (Math.hypot(tx-PX, ty-PY) > Math.min(W,H)*.18){
+        pulses.push({t0:ms, tx:tx, ty:ty, dur: 900 + rnd()*500});
+        return;
+      }
+    }
+  }
+
   var T1 = 1200, T2 = 2600, T3 = 4000;
   var t0 = 0, raf = 0, last = 0, frozen = false, running = false, elapsed = 0;
   var LEV = 12;
@@ -3445,11 +3471,20 @@ function onTheme(fn){ themeSubs.push(fn); }
           trail:'124,58,237', coreA:1, gamma:1.35 };
   }
 
+  var PUSH_R = 130, PUSH_R2 = PUSH_R*PUSH_R, PUSH_MAX = 26;
+
   function render(ms){
     var pal = palette(), i, p, k, a, x, y;
     ctx.clearRect(0,0,W,H);
 
+    /* le pointeur est suivi en amorti, pour que rien ne saute */
+    var tOn = (mAim.on && phase3Ready) ? 1 : 0;
+    mNow.on += (tOn - mNow.on) * .10;
+    mNow.x  += (mAim.x - mNow.x) * .16;
+    mNow.y  += (mAim.y - mNow.y) * .16;
+
     var phase = ms < T1 ? 0 : ms < T2 ? 1 : ms < T3 ? 2 : 3;
+    phase3Ready = phase === 3;
     var trails = phase === 0;
 
     if (trails){
@@ -3507,6 +3542,19 @@ function onTheme(fn){ themeSubs.push(fn); }
         p.x = p.tx; p.y = p.ty;
       }
       x = p.x; y = p.y;
+      if (phase === 3 && mNow.on > .01){
+        /* parallaxe : les plans proches bougent plus que les lointains */
+        x += (mNow.x - W*.5) * .016 * p.dep * mNow.on;
+        y += (mNow.y - H*.5) * .012 * p.dep * mNow.on;
+        /* écartement local : les particules s'ouvrent devant le curseur */
+        var ddx = x - mNow.x, ddy = y - mNow.y;
+        var dd2 = ddx*ddx + ddy*ddy;
+        if (dd2 < PUSH_R2 && dd2 > 1){
+          var dd = Math.sqrt(dd2), ff = 1 - dd/PUSH_R;
+          var push = ff*ff * PUSH_MAX * mNow.on * (.55 + .45*p.dep);
+          x += ddx/dd * push; y += ddy/dd * push;
+        }
+      }
       if (x < -8 || x > W+8 || y < -8 || y > H+8) continue;
 
       if (phase === 0){
@@ -3585,10 +3633,35 @@ function onTheme(fn){ themeSubs.push(fn); }
       ctx.globalAlpha = 1;
     }
 
+    /* — impulsions issues de Paris — */
+    if (phase === 3 && !RM.matches){
+      if (ms > nextPulse){ spawnPulse(ms); nextPulse = ms + 2200 + rnd()*1600; }
+      for (i = pulses.length - 1; i >= 0; i--){
+        var pu = pulses[i];
+        var q = (ms - pu.t0) / pu.dur;
+        if (q >= 1){ pulses.splice(i,1); continue; }
+        var qe = ease(q);
+        var qx = PX + (pu.tx-PX)*qe, qy = PY + (pu.ty-PY)*qe;
+        var fade = q < .18 ? q/.18 : (q > .72 ? (1-q)/.28 : 1);
+        /* traînée */
+        var qb = ease(Math.max(0, q-.09));
+        ctx.strokeStyle = 'rgba(' + pal.trail + ',' + (.34*fade).toFixed(3) + ')';
+        ctx.lineWidth = 1.3; ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(PX + (pu.tx-PX)*qb, PY + (pu.ty-PY)*qb);
+        ctx.lineTo(qx, qy); ctx.stroke();
+        /* tête */
+        ctx.beginPath(); ctx.arc(qx, qy, 2.1, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(' + pal.paris + ',' + (.92*fade).toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+
     /* indicateur de séquence */
     seq(phase);
   }
 
+  var phase3Ready = false;
   var seqBars = $$('#heroSeq i'), seqLbl = document.getElementById('heroSeqLbl'), lastPhase = -1;
   var SEQL = ['arrivée','onde de parole','contour de l’Europe','figé · Paris'];
   function seq(phase){
@@ -3601,7 +3674,8 @@ function onTheme(fn){ themeSubs.push(fn); }
   function loop(now){
     if (!running) return;
     /* 30 fps pendant la narration, 15 fps une fois figé (scintillement + Paris) */
-    if (now - last < (elapsed > T3 ? 66 : 32)){ raf = requestAnimationFrame(loop); return; }
+    var budget = elapsed > T3 ? ((mAim.on || pulses.length) ? 32 : 66) : 32;
+    if (now - last < budget){ raf = requestAnimationFrame(loop); return; }
     last = now;
     if (!t0) t0 = now;
     elapsed = now - t0;
