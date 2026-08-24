@@ -1751,7 +1751,8 @@ html.is-locked,html.is-locked body{overflow:hidden}
                 <circle cx="475" cy="292" r="2.6"/><text x="491" y="296">Webchat</text>
                 <circle cx="475" cy="318" r="2.6"/><text x="491" y="322">Campagnes sortantes</text>
               </g>
-              <text class="pp-sig__m" x="471" y="356">bientôt&nbsp;: WhatsApp · SMS · Messenger</text>
+              <text class="pp-sig__m" x="471" y="350">bientôt&nbsp;: WhatsApp · SMS</text>
+              <text class="pp-sig__m" x="471" y="365">Messenger · Instagram</text>
             </g>
 
             <!-- pilier 03 -->
@@ -2069,6 +2070,7 @@ html.is-locked,html.is-locked body{overflow:hidden}
             <span class="nx2-case__m mono tnum">×3</span></button>
       </div>
       <div class="nx2-cases__stage">
+        <div class="nx2-pans">
           <div class="nx2-pan is-on" role="tabpanel" id="pan-support" aria-labelledby="tab-support" data-pan="support">
             <div class="nx2-pan__head"><span class="nx-live"><i></i>appel en cours</span>
               <span class="mono">support client · fr-FR</span></div>
@@ -2109,16 +2111,40 @@ html.is-locked,html.is-locked body{overflow:hidden}
             <div class="nx2-pan__foot"><span class="nx2-pan__out">Échéancier accepté</span>
               <span class="nx2-pan__m"><b class="tnum">×3</b> de promesses de paiement tenues</span></div>
           </div>
-        <svg class="nx2-fan" viewBox="0 0 420 300" aria-hidden="true">
-          <defs><radialGradient id="nx2g"><stop offset="0" stop-color="#9F32FC" stop-opacity=".5"/><stop offset="1" stop-color="#6772E5" stop-opacity="0"/></radialGradient></defs>
-          <circle cx="46" cy="150" r="86" fill="url(#nx2g)"/>
-          <g class="nx2-fan__l">
-            <path d="M46 150C160 150 240 46 392 40"/><path d="M46 150C160 150 240 96 392 95"/>
-            <path d="M46 150C160 150 240 150 392 150"/><path d="M46 150C160 150 240 204 392 205"/>
-            <path d="M46 150C160 150 240 254 392 260"/>
+        </div>
+        <svg class="nx2-rt" viewBox="0 0 400 178" data-branch="1" role="img"
+             aria-label="Un appel entrant, un même moteur Callem, cinq issues possibles">
+          <g class="nx2-rt__b">
+        <path class="b b1" d="M150 80C210 80 250 16 366 16"/>
+        <path class="b b2" d="M150 80C210 80 250 48 366 48"/>
+        <path class="b b3" d="M150 80C210 80 250 80 366 80"/>
+        <path class="b b4" d="M150 80C210 80 250 112 366 112"/>
+        <path class="b b5" d="M150 80C210 80 250 144 366 144"/>
           </g>
-          <circle class="nx2-fan__c" cx="46" cy="150" r="17"/>
-          <circle class="nx2-fan__p" cx="46" cy="150" r="4.5"/>
+          <g class="nx2-rt__pk">
+        <path class="pk pk1" d="M150 80C210 80 250 16 366 16"/>
+        <path class="pk pk2" d="M150 80C210 80 250 48 366 48"/>
+        <path class="pk pk3" d="M150 80C210 80 250 80 366 80"/>
+        <path class="pk pk4" d="M150 80C210 80 250 112 366 112"/>
+        <path class="pk pk5" d="M150 80C210 80 250 144 366 144"/>
+          </g>
+          <g class="nx2-rt__e">
+        <circle class="e e1" cx="366" cy="16" r="4.5"/>
+        <circle class="e e2" cx="366" cy="48" r="4.5"/>
+        <circle class="e e3" cx="366" cy="80" r="4.5"/>
+        <circle class="e e4" cx="366" cy="112" r="4.5"/>
+        <circle class="e e5" cx="366" cy="144" r="4.5"/>
+          </g>
+
+          <circle class="nx2-rt__ring" cx="34" cy="80" r="15"/>
+          <circle class="nx2-rt__in" cx="34" cy="80" r="11"/>
+          <path class="nx2-rt__ph" d="M30 76a1.6 1.6 0 0 1 1.6-1.6h1.6l1.6 4-1.6.8a8 8 0 0 0 3.2 3.2l.8-1.6 4 1.6v1.6a1.6 1.6 0 0 1-1.6 1.6A12.8 12.8 0 0 1 30 76Z"/>
+          <text class="nx2-rt__t" x="34" y="108" text-anchor="middle">appel</text>
+
+          <rect class="nx2-rt__core" x="102" y="58" width="44" height="44" rx="13"/>
+          <svg x="112" y="68" width="24" height="24" viewBox="0 0 127 127" aria-hidden="true"><use href="#callem-mark"/></svg>
+          <text class="nx2-rt__t" x="124" y="118" text-anchor="middle">un seul moteur</text>
+          <text class="nx2-rt__t nx2-rt__t--r" x="380" y="172" text-anchor="end">cinq issues</text>
         </svg>
       </div>
     </div>
@@ -2253,43 +2279,58 @@ html.is-locked,html.is-locked body{overflow:hidden}
       <!-- V11 · carte d’Europe, nœud Paris pulsé -->
       <div class="tz__art rise">
         <figure class="map" style="margin:0" data-chart>
-          <svg viewBox="0 0 600 500" fill="none" role="img" aria-label="Carte d’Europe : le nœud de traitement Paris est relié à neuf villes européennes, tous les flux restent dans l’Union européenne">
+          <svg viewBox="0 0 600 500" fill="none" role="img" aria-label="Carte d’Europe&nbsp;: le nœud de traitement Paris est relié à neuf villes européennes, tous les flux restent dans l’Union européenne">
             <rect width="600" height="500" fill="url(#pt-dots)" color="var(--accent)" opacity=".6"/>
             <g fill="var(--accent-tint)" stroke="var(--accent)" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round">
-              <path class="draw" style="--len:1900" d="M58 300 120 282 140 275 128 240 155 232 178 225 205 222 232 208 240 190 255 196 272 175 300 182 340 180 368 190 382 175 400 190 420 230 410 270 380 285 355 300 330 318 318 345 300 330 292 300 270 300 258 330 245 352 232 340 240 310 222 285 200 290 180 300 160 318 150 330 130 360 95 365 65 350Z"/>
-              <path class="draw" style="--len:760;--dl:.3s" d="M250 150 262 110 280 70 300 60 318 80 330 120 315 150 300 140 285 160 268 175Z"/>
-              <path class="draw" style="--len:340;--dl:.5s" d="M120 205 132 180 145 150 152 175 168 195 155 215 140 225Z"/>
-              <path class="draw" style="--len:180;--dl:.6s" d="M98 195 112 188 118 205 105 215Z"/>
+              <path class="draw" style="--len:961;--dl:0.00s" d="M211.3 339.3 217.3 296.7 204.2 279.9 182.0 263.2 214.3 258.6 245.5 225.1 264.7 216.0 277.8 194.7 300.0 185.6 316.1 179.5 325.2 155.1 335.3 124.7 339.3 147.5 356.5 155.1 372.6 176.4 417.0 168.8 441.2 162.7 466.4 173.4 471.4 231.2 463.4 269.3 461.3 307.3 456.3 330.1 431.1 345.4 421.0 353.0 395.8 345.4 366.6 307.3 335.3 296.7 305.0 301.2 305.0 333.2 277.8 339.3 259.7 345.4 261.7 354.5 236.5 349.9Z"/>
+              <path class="draw" style="--len:412;--dl:0.25s" d="M138.7 333.2 158.8 336.2 189.1 337.8 211.3 339.3 236.5 349.9 261.7 354.5 238.5 375.8 229.4 398.6 226.4 416.9 211.3 430.6 184.0 441.2 165.9 448.8 154.8 433.6 139.7 436.7 140.7 413.8 133.6 409.3 139.7 375.8 140.7 360.6Z"/>
+              <path class="draw" style="--len:370;--dl:0.40s" d="M306.1 333.2 319.2 324.1 330.3 345.4 340.3 354.5 354.5 368.2 366.6 372.8 373.6 381.9 386.7 391.0 389.7 407.8 386.7 421.5 402.9 406.2 416.0 389.5 392.8 362.1 370.6 353.0 365.5 336.2 356.5 330.1 353.4 318.0 355.5 307.3 337.3 313.4 322.2 307.3 307.1 314.9Z"/>
+              <path class="draw" style="--len:413;--dl:0.55s" d="M282.9 115.6 279.8 86.7 295.0 56.2 330.3 41.0 370.6 41.0 400.8 48.6 416.0 79.0 411.9 97.3 395.8 117.1 370.6 147.5 359.5 146.0 350.4 124.7 345.4 103.4 320.2 103.4 300.0 117.1Z"/>
+              <path class="draw" style="--len:379;--dl:0.70s" d="M171.9 237.3 199.2 223.6 199.2 187.1 181.0 178.0 179.0 162.7 170.9 149.0 179.0 108.0 199.2 108.0 209.2 132.3 214.3 170.4 234.5 193.2 246.6 200.8 239.5 217.5 219.3 228.2Z"/>
+              <path class="draw" style="--len:178;--dl:0.85s" d="M123.5 214.5 133.6 185.6 128.6 173.4 148.7 158.2 168.9 159.7 168.9 188.6 163.9 205.4 138.7 216.0Z"/>
             </g>
             <g stroke="url(#cg-brand-h)" stroke-width="1.4" opacity=".85" fill="none">
-              <path class="flow" d="M170 258C210 236 240 226 272 222"/>
-              <path class="flow" d="M170 258C140 286 120 306 96 330" style="animation-delay:-.4s"/>
-              <path class="flow" d="M170 258C200 276 224 300 245 318" style="animation-delay:-.8s"/>
-              <path class="flow" d="M170 258C182 244 194 234 205 228" style="animation-delay:-1.2s"/>
-              <path class="flow" d="M170 258C222 236 276 222 318 215" style="animation-delay:-1.6s"/>
-              <path class="flow" d="M170 258C216 210 262 158 300 120" style="animation-delay:-2s"/>
-              <path class="flow" d="M170 258C136 282 100 306 56 335" style="animation-delay:-2.4s"/>
-              <path class="flow" d="M170 258C150 236 126 214 106 202" style="animation-delay:-2.8s"/>
-              <path class="flow" d="M170 258C190 266 208 276 222 283" style="animation-delay:-3.2s"/>
+              <path class="flow" d="M253.1 256.2Q271.3 232.1 278.9 202.8"/>
+              <path class="flow" d="M253.1 256.2Q314.4 239.5 364.6 200.5" style="animation-delay:-0.4s"/>
+              <path class="flow" d="M253.1 256.2Q352.3 249.4 441.3 204.9" style="animation-delay:-0.8s"/>
+              <path class="flow" d="M253.1 256.2Q348.3 192.4 411.6 96.9" style="animation-delay:-1.2s"/>
+              <path class="flow" d="M253.1 256.2Q282.4 288.9 322.1 307.9" style="animation-delay:-1.6s"/>
+              <path class="flow" d="M253.1 256.2Q293.7 319.4 355.4 362.1" style="animation-delay:-2.0s"/>
+              <path class="flow" d="M253.1 256.2Q209.8 314.3 192.1 384.7" style="animation-delay:-2.4s"/>
+              <path class="flow" d="M253.1 256.2Q179.8 321.8 137.3 410.5" style="animation-delay:-2.8s"/>
+              <path class="flow" d="M253.1 256.2Q216.5 213.4 166.3 187.9" style="animation-delay:-3.2s"/>
             </g>
             <g fill="var(--accent)">
-              <circle cx="272" cy="222" r="3"/><circle cx="96" cy="330" r="3"/><circle cx="245" cy="318" r="3"/>
-              <circle cx="205" cy="228" r="3"/><circle cx="318" cy="215" r="3"/><circle cx="300" cy="120" r="3"/>
-              <circle cx="56" cy="335" r="3"/><circle cx="106" cy="202" r="3"/><circle cx="222" cy="283" r="3"/>
+              <circle cx="278.9" cy="202.8" r="3"/>
+              <circle cx="364.6" cy="200.5" r="3"/>
+              <circle cx="441.3" cy="204.9" r="3"/>
+              <circle cx="411.6" cy="96.9" r="3"/>
+              <circle cx="322.1" cy="307.9" r="3"/>
+              <circle cx="355.4" cy="362.1" r="3"/>
+              <circle cx="192.1" cy="384.7" r="3"/>
+              <circle cx="137.3" cy="410.5" r="3"/>
+              <circle cx="166.3" cy="187.9" r="3"/>
             </g>
             <g font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" opacity=".7">
-              <text x="280" y="218">Berlin</text><text x="66" y="344">Madrid</text><text x="252" y="330">Rome</text>
-              <text x="212" y="222">Amsterdam</text><text x="326" y="211">Varsovie</text><text x="308" y="116">Stockholm</text>
-              <text x="12" y="349">Lisbonne</text><text x="60" y="198">Dublin</text><text x="230" y="295">Milan</text>
+              <text x="285.9" y="195.8">Amsterdam</text>
+              <text x="371.6" y="204.5">Berlin</text>
+              <text x="448.3" y="208.9">Varsovie</text>
+              <text x="419.6" y="100.9">Stockholm</text>
+              <text x="329.1" y="311.9">Milan</text>
+              <text x="362.4" y="366.1">Rome</text>
+              <text x="199.1" y="396.7">Madrid</text>
+              <text x="130.3" y="414.5" text-anchor="end">Lisbonne</text>
+              <text x="159.3" y="191.9" text-anchor="end">Dublin</text>
             </g>
-            <circle cx="170" cy="258" r="56" fill="url(#cg-paris)"/>
-            <circle cx="170" cy="258" r="6.5" fill="var(--accent)"/>
-            <circle class="paris-pulse" cx="170" cy="258" r="14" stroke="var(--accent)" stroke-width="1.6" fill="none"/>
-            <circle class="paris-pulse paris-pulse--2" cx="170" cy="258" r="14" stroke="#6772E5" stroke-width="1.2" fill="none"/>
+            <circle cx="253.1" cy="256.2" r="56" fill="url(#cg-paris)"/>
+            <circle cx="253.1" cy="256.2" r="6.5" fill="var(--accent)"/>
+            <circle class="paris-pulse" cx="253.1" cy="256.2" r="14" stroke="var(--accent)" stroke-width="1.6" fill="none"/>
+            <circle class="paris-pulse paris-pulse--2" cx="253.1" cy="256.2" r="14" stroke="#6772E5" stroke-width="1.2" fill="none"/>
+            <rect x="263.1" y="236.2" width="182" height="44" rx="7" fill="var(--bg)" opacity=".7"/>
             <g font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor">
-              <text x="186" y="252" style="fill:var(--tx-1)">PARIS</text>
-              <text x="186" y="266" font-size="9" style="fill:var(--accent)">48.8566°N 2.3522°E</text>
-              <text x="186" y="278" font-size="9" opacity=".65">eu-west-paris · inférence</text>
+              <text x="269.1" y="250.2" style="fill:var(--tx-1)">PARIS</text>
+              <text x="269.1" y="264.2" font-size="9" style="fill:var(--accent)">48.8566°N 2.3522°E</text>
+              <text x="269.1" y="276.2" font-size="9" opacity=".65">eu-west-paris · inférence</text>
             </g>
             <g stroke="currentColor" stroke-opacity=".2" stroke-width="1" stroke-dasharray="4 6">
               <path d="M420 40h150M570 40v40M420 40v40M420 80h150"/>
@@ -4356,13 +4397,8 @@ path.flow.is-hot{opacity:1!important;stroke-width:2;filter:drop-shadow(0 0 5px c
 .nx2-pan__out{font-size:.75rem;color:#3FCF8E}
 .nx2-pan__m{font-size:.68rem;color:var(--tx-4)}
 .nx2-pan__m b{font-size:1rem;color:var(--tx-1);margin-right:.3rem}
-.nx2-fan{position:absolute;top:0;left:0;right:0;height:56%;width:100%;opacity:.9}
-.nx2-fan__l path{fill:none;stroke:color-mix(in oklab,var(--brand-400) 34%,transparent);stroke-width:1.1}
-.nx2-fan__c{fill:var(--surface-2);stroke:var(--accent);stroke-width:1.3}
-.nx2-fan__p{fill:#C4B5FD;filter:drop-shadow(0 0 6px color-mix(in oklab,var(--brand-glow) 80%,transparent))}
 @media (prefers-reduced-motion:no-preference){
-  .nx2-fan__p{animation:nx2Fan 3s cubic-bezier(.4,0,.2,1) infinite}
-  @keyframes nx2Fan{0%{transform:translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}
+    @keyframes nx2Fan{0%{transform:translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}
     100%{transform:translateX(346px);opacity:0}}
 }
 
@@ -4444,6 +4480,8 @@ path.flow.is-hot{opacity:1!important;stroke-width:2;filter:drop-shadow(0 0 5px c
         t.setAttribute('aria-selected', on ? 'true' : 'false');
       });
       pans.forEach(function(pn, k){ pn.classList.toggle('is-on', k === idx); });
+      var rt = cases.querySelector('.nx2-rt');
+      if (rt) rt.setAttribute('data-branch', String(idx + 1));
     }
     tabs.forEach(function(t, k){
       t.addEventListener('click', function(){ pick(k); held = true; stop(); });
@@ -4521,5 +4559,41 @@ path.flow.is-hot{opacity:1!important;stroke-width:2;filter:drop-shadow(0 0 5px c
   }
 })();
 </script>
+<style>
+/* ─── schéma d'aiguillage : un appel, un moteur, cinq issues ─────────────── */
+.nx2-cases__stage{display:flex;flex-direction:column}
+.nx2-rt{display:block;width:100%;height:auto;padding:1rem 1.1rem .2rem;flex:0 0 auto}
+.nx2-pans{position:relative;flex:1 1 auto;min-height:186px}
+.nx2-rt__b .b{fill:none;stroke:color-mix(in oklab,var(--brand-400) 26%,transparent);stroke-width:1.1;
+  transition:stroke .45s ease,stroke-width .45s ease}
+.nx2-rt__e .e{fill:color-mix(in oklab,var(--brand-400) 34%,transparent);
+  transition:fill .45s ease,r .45s ease}
+.nx2-rt__pk .pk{fill:none;stroke:#C4B5FD;stroke-width:2.2;stroke-linecap:round;
+  stroke-dasharray:9 260;stroke-dashoffset:0;opacity:0;
+  filter:drop-shadow(0 0 6px color-mix(in oklab,var(--brand-glow) 85%,transparent))}
+.nx2-rt__ring{fill:none;stroke:color-mix(in oklab,var(--accent) 46%,transparent);stroke-width:1.2}
+.nx2-rt__in{fill:var(--surface-2);stroke:var(--accent);stroke-width:1.3}
+.nx2-rt__ph{fill:#DDD3FE}
+.nx2-rt__core{fill:var(--surface-2);stroke:color-mix(in oklab,var(--accent) 55%,transparent);stroke-width:1.3}
+.nx2-rt__t{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;fill:var(--tx-4)}
+.nx2-rt__t--r{fill:color-mix(in oklab,var(--accent) 78%,transparent)}
+
+/* la branche sélectionnée s'allume */
+.nx2-rt[data-branch="1"] .b1,.nx2-rt[data-branch="2"] .b2,.nx2-rt[data-branch="3"] .b3,
+.nx2-rt[data-branch="4"] .b4,.nx2-rt[data-branch="5"] .b5{
+  stroke:color-mix(in oklab,var(--accent) 90%,transparent);stroke-width:1.8}
+.nx2-rt[data-branch="1"] .e1,.nx2-rt[data-branch="2"] .e2,.nx2-rt[data-branch="3"] .e3,
+.nx2-rt[data-branch="4"] .e4,.nx2-rt[data-branch="5"] .e5{fill:var(--accent);r:5.5}
+
+@media (prefers-reduced-motion:no-preference){
+  .nx2-rt[data-branch="1"] .pk1,.nx2-rt[data-branch="2"] .pk2,.nx2-rt[data-branch="3"] .pk3,
+  .nx2-rt[data-branch="4"] .pk4,.nx2-rt[data-branch="5"] .pk5{
+    opacity:1;animation:nx2Pk 1.9s cubic-bezier(.4,0,.2,1) infinite}
+  @keyframes nx2Pk{from{stroke-dashoffset:269}to{stroke-dashoffset:0}}
+  .nx2-rt__ring{transform-origin:34px 80px;animation:nx2Ring 2.8s cubic-bezier(.22,1,.36,1) infinite}
+  @keyframes nx2Ring{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.9);opacity:0}100%{opacity:0}}
+}
+</style>
 </body>
 </html>
