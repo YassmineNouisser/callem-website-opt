@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Callem — trois héros, vocabulaire 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{margin:0;font-family:Inter,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,p,ul,figure{margin:0}ul{padding:0;list-style:none}
+:root{
+  --acc:#EB6A0A; --vio:#8B3CF7; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+.sc{min-height:100svh;scroll-snap-align:start;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center}
+.in{width:min(100% - 3rem,1320px);margin-inline:auto}
+
+/* étiquette de repérage */
+.tag{position:fixed;left:1.1rem;top:1.1rem;z-index:99;display:flex;gap:.4rem;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+.tag a{text-decoration:none;padding:.42rem .7rem;border-radius:5px;
+  border:1px solid rgba(128,128,128,.32);color:#7A7A7A;background:rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.tag a:hover{border-color:#111;color:#111}
+.note{position:fixed;right:1.1rem;bottom:1.1rem;z-index:99;max-width:23rem;
+  font-family:var(--mono);font-size:.6rem;line-height:1.7;letter-spacing:.04em;
+  color:#8A8A8A;text-align:right;pointer-events:none}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   A · CONSOLE — sombre, dense, instrumenté. Le produit est le visuel.
+   ═══════════════════════════════════════════════════════════════════════════ */
+#a{background:#0A0B0D;color:#E7E9EC}
+#a .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);
+  gap:clamp(2rem,5vw,5.5rem);align-items:center}
+@media(max-width:1000px){#a .in{grid-template-columns:1fr;gap:2.4rem}}
+.a-meta{display:flex;gap:1.6rem;font-family:var(--mono);font-size:.63rem;letter-spacing:.16em;
+  text-transform:uppercase;color:#6C7178;margin-bottom:2.2rem}
+.a-meta b{color:#E7E9EC;font-weight:400}
+.a-meta i{width:6px;height:6px;border-radius:50%;background:var(--acc);display:inline-block;
+  margin-right:.5rem;vertical-align:1px;animation:blip 2s ease-out infinite}
+@keyframes blip{0%{box-shadow:0 0 0 0 rgba(235,106,10,.55)}70%{box-shadow:0 0 0 7px rgba(235,106,10,0)}100%{box-shadow:0 0 0 0 rgba(235,106,10,0)}}
+#a h1{font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:1.0;letter-spacing:-.045em;
+  font-weight:500;color:#fff}
+#a h1 em{font-style:normal;color:#6C7178}
+#a .lede{margin-top:1.5rem;font-size:1.02rem;line-height:1.6;color:#9BA1A9;max-width:44ch}
+.a-cta{display:flex;gap:1.6rem;margin-top:2.4rem;font-size:.96rem}
+.a-cta a{color:#fff;text-decoration:none;padding-bottom:.35rem;
+  border-bottom:1px solid rgba(255,255,255,.28);transition:border-color .3s,color .3s}
+.a-cta a:hover{border-color:var(--acc);color:var(--acc)}
+.a-cta a.sec{color:#8A9199;border-color:rgba(255,255,255,.14)}
+
+.cons{border:1px solid #1C1F24;border-radius:10px;background:#0D0F12;overflow:hidden;
+  font-family:var(--mono)}
+.cons__h{display:flex;align-items:center;gap:.6rem;padding:.7rem .95rem;
+  border-bottom:1px solid #1C1F24;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:#6C7178}
+.cons__h b{margin-left:auto;color:#E7E9EC;font-weight:400;font-variant-numeric:tabular-nums}
+.cons__b{padding:.95rem}
+.ln{display:grid;grid-template-columns:3.6rem 5.6rem 1fr;gap:.7rem;padding:.42rem 0;
+  font-size:.74rem;color:#C3C8CE;opacity:0;transform:translateY(6px);
+  transition:opacity .4s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.ln.on{opacity:1;transform:none}
+.ln span:first-child{color:#5A6068;font-variant-numeric:tabular-nums}
+.ln span:nth-child(2){color:#6C7178;letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;
+  padding-top:.1rem}
+.ln.me span:nth-child(2){color:var(--acc)}
+.ln.tool span:last-child{color:#B79BF5}
+.ln.ok span:last-child{color:#5FCB92}
+.cons__f{border-top:1px solid #1C1F24;padding:.8rem .95rem;display:grid;gap:.42rem}
+.bar{display:grid;grid-template-columns:3.4rem 1fr 3.4rem;gap:.7rem;align-items:center;
+  font-size:.62rem;color:#6C7178}
+.bar u{text-decoration:none;height:3px;border-radius:3px;background:#1C1F24;overflow:hidden}
+.bar u i{display:block;height:100%;width:0;background:var(--acc);
+  transition:width 1s cubic-bezier(.16,1,.3,1)}
+.cons.go .bar u i{width:var(--w)}
+.bar b{text-align:right;color:#C3C8CE;font-weight:400;font-variant-numeric:tabular-nums}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   B · ÉDITORIAL — blanc dur, type énorme, photo en bloc net, données en filet.
+   ═══════════════════════════════════════════════════════════════════════════ */
+#b{background:#fff;color:#0E0E0E;justify-content:flex-start;padding-top:clamp(4rem,9vh,7rem)}
+#b h1{font-size:clamp(2.9rem,8.4vw,8.2rem);line-height:.92;letter-spacing:-.055em;
+  font-weight:600;max-width:16ch}
+#b h1 span{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-style:italic;
+  letter-spacing:-.02em}
+.b-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;margin-top:clamp(2rem,5vh,3.6rem);
+  background:#E6E6E6;border-block:1px solid #E6E6E6}
+.b-grid>*{background:#fff;padding:1.3rem 1.2rem}
+.b-ph{grid-column:span 5;padding:0!important;position:relative;overflow:hidden;min-height:clamp(180px,30vh,300px)}
+.b-ph img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.12)}
+.b-ph figcaption{position:absolute;left:.9rem;bottom:.8rem;font-family:var(--mono);
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  mix-blend-mode:difference}
+.b-txt{grid-column:span 4;display:flex;flex-direction:column;justify-content:space-between}
+.b-txt p{font-size:1rem;line-height:1.55;color:#4A4A4A;max-width:34ch}
+.b-txt .go{margin-top:1.4rem;display:inline-flex;gap:.5rem;align-items:center;
+  font-weight:600;text-decoration:none;color:#0E0E0E;font-size:.96rem}
+.b-txt .go i{width:1.6rem;height:1px;background:var(--vio);display:block;
+  transition:width .4s cubic-bezier(.16,1,.3,1)}
+.b-txt .go:hover i{width:2.6rem}
+.b-num{grid-column:span 3;display:grid;align-content:space-between;gap:1rem}
+.b-num div b{display:block;font-size:clamp(1.5rem,2.4vw,2.1rem);letter-spacing:-.04em;
+  font-weight:600;line-height:1}
+.b-num div span{display:block;margin-top:.25rem;font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.13em;text-transform:uppercase;color:#8A8A8A}
+.b-num div b em{font-style:normal;color:var(--vio)}
+@media(max-width:900px){.b-ph{grid-column:span 12;min-height:200px}
+  .b-txt,.b-num{grid-column:span 12}}
+.b-strip{display:flex;flex-wrap:wrap;gap:2.2rem;margin-top:1.3rem;font-family:var(--mono);
+  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8A8A8A}
+.b-strip b{color:#0E0E0E;font-weight:400}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   C · SIGNAL — l'onde devient un instrument, pas un décor.
+   ═══════════════════════════════════════════════════════════════════════════ */
+#c{background:#F6F6F4;color:#111;justify-content:space-between;padding-block:clamp(4rem,9vh,6.5rem)}
+.c-top{display:flex;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+#c h1{font-size:clamp(2.4rem,5.6vw,4.8rem);line-height:.98;letter-spacing:-.05em;font-weight:600;
+  max-width:15ch}
+.c-side{margin-left:auto;max-width:30ch}
+.c-side p{font-size:.98rem;line-height:1.55;color:#4A4A4A}
+.c-side .btns{display:flex;gap:.6rem;margin-top:1.3rem}
+.c-side a{text-decoration:none;font-size:.92rem;font-weight:600;padding:.72rem 1.15rem;
+  border-radius:6px;border:1px solid #111;color:#fff;background:#111;
+  transition:background .25s,color .25s}
+.c-side a.o{background:transparent;color:#111;border-color:#D6D6D2}
+.c-side a.o:hover{border-color:#111}
+.c-wave{margin-top:clamp(1.8rem,4vh,3rem);display:flex;align-items:flex-end;gap:2px;
+  height:clamp(120px,22vh,210px)}
+.c-wave i{flex:1;background:#111;border-radius:1px;height:8%;transform-origin:50% 100%;
+  transition:height .18s linear,background .4s}
+.c-wave i.hot{background:var(--acc)}
+.c-read{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#E2E2DE;
+  border:1px solid #E2E2DE;margin-top:clamp(1.4rem,3vh,2.2rem)}
+.c-read div{background:#F6F6F4;padding:.95rem 1rem}
+.c-read dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;
+  color:#8A8A86}
+.c-read dd{margin:.35rem 0 0;font-size:1.02rem;font-weight:500;font-variant-numeric:tabular-nums}
+.c-read dd.live{color:var(--acc)}
+@media(max-width:800px){.c-read{grid-template-columns:repeat(2,1fr)}}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   D · ORCHESTRATION — trois temps, inspirés du mécanisme observé :
+   1. photo plein cadre, le fil de cartes monte à droite
+   2. la photo se réduit en médaillon capsule, les cartes se redistribuent
+      en constellation autour
+   3. la phrase de catégorie prend l'écran
+   Thème Callem : clair, violet et jaune Hermès.
+   ═══════════════════════════════════════════════════════════════════════════ */
+#d{scroll-snap-align:none;height:420vh;display:block;overflow:visible;background:#FBFAF8;color:#111}
+.o-pin{position:sticky;top:0;height:100svh;overflow:hidden;
+  background:#FBFAF8;transition:background .8s ease}
+.o-pin.st2{background:#FDFCFB}
+.o-pin::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  transition:opacity .8s ease;
+  background:radial-gradient(38% 44% at 26% 20%,rgba(235,106,10,.10),transparent 68%),
+             radial-gradient(34% 40% at 78% 76%,rgba(139,60,247,.10),transparent 70%)}
+.o-pin.st2::after{opacity:1}
+.o-stage{position:absolute;inset:0}
+
+/* ── la photo : plein cadre, puis médaillon capsule ────────────────────── */
+.o-ph{position:absolute;left:72%;top:50%;width:58%;height:94%;
+  transform:translate(-50%,-50%);border-radius:22px;overflow:hidden;
+  transition:left 1s var(--E),top 1s var(--E),width 1s var(--E),height 1s var(--E),
+             border-radius 1s var(--E)}
+.st2 .o-ph{left:50%;top:45%;width:33%;height:52%;border-radius:999px}
+.o-ph img{width:100%;height:100%;object-fit:cover;object-position:58% 42%;
+  filter:saturate(.92) contrast(1.05)}
+.o-ph::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(96deg,#FBFAF8 0%,rgba(251,250,248,.86) 26%,transparent 62%);
+  transition:opacity .8s ease}
+.st2 .o-ph::after{opacity:0}
+:root{--E:cubic-bezier(.16,1,.3,1)}
+
+/* ── le bloc de texte, présent au premier temps ────────────────────────── */
+.o-copy{position:absolute;left:clamp(1.2rem,5vw,4.5rem);top:50%;transform:translateY(-50%);
+  max-width:min(30ch,40%);z-index:6;transition:opacity .7s ease,transform .9s var(--E)}
+.st2 .o-copy{opacity:0;transform:translateY(-50%) translateX(-24px);pointer-events:none}
+.o-kick{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem}
+.o-kick::before{content:"";width:1.7rem;height:2px;background:var(--acc);border-radius:2px}
+#d h1{font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.03;letter-spacing:-.045em;font-weight:600}
+.o-lede{margin-top:1rem;font-size:1rem;line-height:1.56;color:#54514E}
+.o-btns{display:flex;gap:.6rem;margin-top:1.5rem}
+.o-btns a{text-decoration:none;font-size:.93rem;font-weight:600;padding:.72rem 1.15rem;
+  border-radius:7px;background:#111;color:#fff;border:1px solid #111}
+.o-btns a.o{background:transparent;color:#111;border-color:#DEDBD6}
+
+/* ── les cartes : une position en fil, une position en orbite ──────────── */
+.o-c{position:absolute;left:var(--x1);top:var(--y1);transform:translate(-50%,-50%) scale(.96);
+  opacity:0;z-index:5;width:max-content;
+  transition:left 1s var(--E),top 1s var(--E),opacity .55s ease,transform .8s var(--E)}
+.o-c.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.st2 .o-c{left:var(--x2);top:var(--y2)}
+
+.o-say{max-width:min(23rem,26vw);background:#fff;border:1px solid #EAE7E2;border-radius:12px;
+  padding:.7rem .85rem .75rem;box-shadow:0 14px 34px -26px rgba(17,17,16,.5);position:relative}
+.o-say::before{content:"";position:absolute;left:0;top:.9rem;bottom:.9rem;width:2px;
+  border-radius:2px;background:linear-gradient(180deg,var(--acc),var(--vio))}
+.o-say b{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#8E8983;margin-bottom:.32rem}
+.o-say p{font-size:.93rem;line-height:1.42;color:#111}
+
+.o-pill{display:inline-flex;align-items:center;gap:.45rem;padding:.42rem .8rem;border-radius:100px;
+  background:#fff;border:1px solid #EAE7E2;box-shadow:0 10px 26px -20px rgba(17,17,16,.5);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#3F3C39}
+.o-pill svg{width:13px;height:13px;color:var(--acc)}
+.o-pill.v svg{color:var(--vio)}
+.o-pill.g{border-color:rgba(27,122,69,.32)}
+.o-pill.g svg{color:#1B7A45}
+.o-pill.dark{background:#141414;border-color:#141414;color:#fff}
+.o-pill.dark svg{color:#5FCB92}
+
+/* la puce d'icône qui déborde du coin — le détail repéré dans la vidéo */
+.o-chip{position:absolute;right:-9px;top:-9px;width:26px;height:26px;border-radius:8px;
+  background:#fff;border:1px solid #EAE7E2;display:grid;place-items:center;
+  box-shadow:0 6px 16px -10px rgba(17,17,16,.5)}
+.o-chip svg{width:13px;height:13px;color:var(--acc)}
+
+.o-wave{display:flex;align-items:flex-end;gap:2.5px;height:34px;padding:.6rem .8rem;
+  background:#fff;border:1px solid #EAE7E2;border-radius:11px;
+  box-shadow:0 12px 30px -24px rgba(17,17,16,.5)}
+.o-wave i{width:3px;border-radius:2px;background:var(--vio);opacity:.75;height:22%}
+@media (prefers-reduced-motion:no-preference){
+  .o-wave i{animation:owv .9s ease-in-out infinite alternate}}
+@keyframes owv{to{height:100%;opacity:1}}
+
+/* ── le troisième temps ────────────────────────────────────────────────── */
+.o-out{position:absolute;inset:0;display:grid;place-items:center;padding:0 6vw;z-index:9;
+  opacity:0;pointer-events:none;transition:opacity .65s ease;background:#FBFAF8}
+.o-out.on{opacity:1}
+.o-out p{font-size:clamp(1.9rem,5vw,4.1rem);line-height:1.05;letter-spacing:-.05em;
+  font-weight:600;text-align:center;max-width:19ch}
+.o-out p em{font-style:normal;color:var(--acc)}
+@media(max-width:900px){
+  .o-copy{max-width:none;left:1.2rem;right:1.2rem;top:26%;transform:none}
+  .o-ph{left:50%;top:70%;width:88%;height:38%}
+  .st2 .o-ph{width:62%;height:30%}
+  .o-say{max-width:60vw}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   E · JOUABLE — on choisit l'appel, on le fait avancer, on interroge chaque
+   ligne. Ce n'est plus une animation qui se déroule : c'est une démo.
+   ═══════════════════════════════════════════════════════════════════════════ */
+#e{scroll-snap-align:start;background:#FBFAF8;color:#111}
+#e .in{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  gap:clamp(1.6rem,4vw,4rem);align-items:center}
+@media(max-width:1020px){#e .in{grid-template-columns:1fr;gap:2rem}}
+.e-kick{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem}
+.e-kick::before{content:"";width:1.7rem;height:2px;background:var(--acc);border-radius:2px}
+#e h1{font-size:clamp(2rem,4.2vw,3.5rem);line-height:1.03;letter-spacing:-.045em;font-weight:600}
+.e-lede{margin-top:1rem;font-size:1rem;line-height:1.56;color:#54514E;max-width:36ch}
+
+/* le choix du scénario */
+.e-pick{margin-top:1.7rem}
+.e-pick>span{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;
+  text-transform:uppercase;color:#8E8983;margin-bottom:.6rem}
+.e-tabs{display:flex;flex-wrap:wrap;gap:.4rem}
+.e-tab{font:inherit;font-size:.87rem;font-weight:500;padding:.6rem .95rem;border-radius:8px;
+  border:1px solid #E4E1DC;background:#fff;color:#54514E;cursor:pointer;
+  transition:border-color .25s,color .25s,background .25s,transform .25s}
+.e-tab:hover{border-color:#111;color:#111;transform:translateY(-1px)}
+.e-tab[aria-pressed="true"]{background:#111;border-color:#111;color:#fff}
+.e-hint{margin-top:1.1rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+  color:#A5A19B}
+
+/* la console */
+.e-box{border:1px solid #E7E4DF;border-radius:14px;background:#fff;overflow:hidden;
+  box-shadow:0 1px 2px rgba(17,17,16,.03),0 26px 54px -36px rgba(17,17,16,.24)}
+.e-head{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;border-bottom:1px solid #F1EFEB;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:#8E8983}
+.e-head s{text-decoration:none;width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none}
+@media (prefers-reduced-motion:no-preference){
+  .e-head s{animation:ebeat 1.9s ease-out infinite}}
+@keyframes ebeat{0%{box-shadow:0 0 0 0 rgba(235,106,10,.5)}70%{box-shadow:0 0 0 7px rgba(235,106,10,0)}100%{box-shadow:0 0 0 0 rgba(235,106,10,0)}}
+.e-head em{font-style:normal;color:#111}
+.e-head b{margin-left:auto;color:#111;font-weight:400;font-variant-numeric:tabular-nums}
+
+.e-feed{padding:.85rem;min-height:clamp(268px,40vh,360px);display:grid;gap:.28rem;align-content:start}
+.e-ev{display:grid;grid-template-columns:3.4rem 5.4rem 1fr;gap:.7rem;align-items:baseline;
+  padding:.44rem .55rem;border-radius:8px;font-size:.86rem;color:#111;
+  opacity:0;transform:translateY(7px);cursor:default;
+  transition:opacity .4s ease,transform .5s var(--E,cubic-bezier(.16,1,.3,1)),background .2s}
+.e-ev.on{opacity:1;transform:none}
+.e-ev:hover{background:#FAF8F5}
+.e-ev>i{font-style:normal;font-family:var(--mono);font-size:.66rem;color:#A5A19B;
+  font-variant-numeric:tabular-nums}
+.e-ev>u{text-decoration:none;font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#8E8983}
+.e-ev.me>u{color:var(--acc)}
+.e-ev.tool>u{color:var(--vio)}
+.e-ev.tool>span{font-family:var(--mono);font-size:.79rem}
+.e-ev.ok>span{color:#1B7A45;font-weight:500}
+.e-ev.tool{cursor:help}
+.e-ev .ret{display:block;margin-top:.25rem;font-family:var(--mono);font-size:.68rem;color:#8E8983;
+  max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease}
+.e-ev.tool:hover .ret,.e-ev.open .ret{max-height:3rem;opacity:1}
+
+.e-foot{border-top:1px solid #F1EFEB;padding:.7rem .85rem;display:flex;align-items:center;gap:.55rem;
+  flex-wrap:wrap}
+.e-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.34rem .7rem;border-radius:100px;
+  border:1px solid #E7E4DF;background:#FBFAF8;font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.1em;text-transform:uppercase;color:#54514E;opacity:0;transform:scale(.94);
+  transition:opacity .4s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.e-badge.on{opacity:1;transform:none}
+.e-badge.g{border-color:rgba(27,122,69,.3);background:#F4FBF7;color:#1B7A45}
+
+/* la barre de transport : on peut la gratter */
+.e-bar{display:flex;align-items:center;gap:.7rem;padding:.6rem .85rem;border-top:1px solid #F1EFEB;
+  background:#FCFBF9}
+.e-play{width:30px;height:30px;border-radius:8px;border:1px solid #E4E1DC;background:#fff;
+  display:grid;place-items:center;cursor:pointer;flex:none;transition:border-color .2s}
+.e-play:hover{border-color:#111}
+.e-play svg{width:12px;height:12px;color:#111}
+.e-scrub{flex:1;height:22px;display:flex;align-items:center;cursor:ew-resize;touch-action:none}
+.e-scrub u{text-decoration:none;flex:1;height:3px;border-radius:3px;background:#E7E4DF;
+  position:relative}
+.e-scrub u i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--acc);width:0}
+.e-scrub u b{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;background:#fff;
+  border:2px solid var(--acc);transform:translate(-50%,-50%);left:0}
+.e-bar>span{font-family:var(--mono);font-size:.6rem;color:#8E8983;font-variant-numeric:tabular-nums;
+  flex:none}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="tag">
+  <a href="#a">A · Console</a><a href="#b">B · Éditorial</a><a href="#c">C · Signal</a><a href="#d">D · Orchestration</a><a href="#e">E · Jouable</a><a href="#d">D · Orchestration</a>
+</nav>
+<p class="note">Trois vocabulaires 2026 · même contenu, même charte<br>
+  filets d’un pixel · rayons serrés · un seul accent · zéro photo de casque</p>
+
+<!-- ══ A ══════════════════════════════════════════════════════════════════ -->
+<section class="sc" id="a">
+  <div class="in">
+    <div>
+      <p class="a-meta"><span><i></i>Appel en cours</span><span>eu-west-paris</span>
+        <span>fr-FR</span></p>
+      <h1>Des agents vocaux qui résolvent.<br><em>Pas qui répondent.</em></h1>
+      <p class="lede">Traités de bout en bout, supervisés en direct, hébergés en France.
+        Sur vos numéros, sans migration.</p>
+      <p class="a-cta"><a href="#">Réserver une démo</a><a class="sec" href="#">Voir la plateforme</a></p>
+    </div>
+    <div class="cons" id="cons">
+      <div class="cons__h"><span>callem.ai / appel #4521</span><b id="clk">00:00</b></div>
+      <div class="cons__b" id="lines">
+        <div class="ln" data-at="2"><span>00:02</span><span>Appelant</span><span>Ma commande #4521 a trois jours de retard.</span></div>
+        <div class="ln me" data-at="6"><span>00:06</span><span>Agent</span><span>Je vérifie tout de suite.</span></div>
+        <div class="ln tool" data-at="9"><span>00:09</span><span>Outil</span><span>crm.get_order(#4521) → 82 ms</span></div>
+        <div class="ln me" data-at="19"><span>00:19</span><span>Agent</span><span>Repartie ce matin, livraison mardi. Je vous envoie le suivi.</span></div>
+        <div class="ln tool" data-at="24"><span>00:24</span><span>Outil</span><span>sms.send(tracking) → 140 ms</span></div>
+        <div class="ln ok" data-at="41"><span>00:41</span><span>Clôture</span><span>Résolu sans humain</span></div>
+      </div>
+      <div class="cons__f">
+        <div class="bar"><span>STT</span><u><i style="--w:16%"></i></u><b>90 ms</b></div>
+        <div class="bar"><span>LLM</span><u><i style="--w:31%"></i></u><b>180 ms</b></div>
+        <div class="bar"><span>TTS</span><u><i style="--w:26%"></i></u><b>150 ms</b></div>
+        <div class="bar"><span>Total</span><u><i style="--w:100%"></i></u><b>580 ms</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ B ══════════════════════════════════════════════════════════════════ -->
+<section class="sc" id="b">
+  <div class="in">
+    <h1>Des agents vocaux qui <span>résolvent</span>. Pas qui répondent.</h1>
+    <div class="b-grid">
+      <figure class="b-ph">
+        <img src="https://images.unsplash.com/photo-1516055619834-586f8c75d1de?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+             alt="Une personne au téléphone en extérieur" loading="lazy" decoding="async">
+        <figcaption>l’appelant · 00:02</figcaption>
+      </figure>
+      <div class="b-txt">
+        <p>Traités de bout en bout, supervisés en direct, hébergés en France.
+          Sur vos numéros, sans migration.</p>
+        <a class="go" href="#"><i></i>Réserver une démo</a>
+      </div>
+      <div class="b-num">
+        <div><b>41 s</b><span>appel résolu</span></div>
+        <div><b>580 ms</b><span>bout en bout</span></div>
+        <div><b><em>0</em></b><span>donnée hors UE</span></div>
+      </div>
+    </div>
+    <p class="b-strip"><span>Paris <b>eu-west</b></span><span>AI Act <b>article 50</b></span>
+      <span>RGPD <b>natif</b></span><span>SIP · CCaaS <b>sans migration</b></span></p>
+  </div>
+</section>
+
+<!-- ══ C ══════════════════════════════════════════════════════════════════ -->
+<section class="sc" id="c">
+  <div class="in">
+    <div class="c-top">
+      <h1>Des agents vocaux qui résolvent.</h1>
+      <div class="c-side">
+        <p>Traités de bout en bout, supervisés en direct, hébergés en France.</p>
+        <div class="btns"><a href="#">Réserver une démo</a><a class="o" href="#">La plateforme</a></div>
+      </div>
+    </div>
+    <div class="c-wave" id="wave" aria-hidden="true"></div>
+    <dl class="c-read">
+      <div><dt>Appel</dt><dd class="live" id="cclk">00:00</dd></div>
+      <div><dt>Étape</dt><dd id="cstep">l’appel entre</dd></div>
+      <div><dt>Latence</dt><dd>580 ms</dd></div>
+      <div><dt>Traitement</dt><dd>eu-west-paris</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ══ D ══════════════════════════════════════════════════════════════════ -->
+<section class="sc" id="d">
+  <div class="o-pin" id="oPin">
+    <div class="o-stage">
+      <figure class="o-ph">
+        <img src="https://images.unsplash.com/photo-1516055619834-586f8c75d1de?auto=format&amp;fit=crop&amp;w=1200&amp;q=76"
+             alt="Une personne au téléphone dans la rue" loading="lazy" decoding="async">
+      </figure>
+      <div class="o-copy">
+        <p class="o-kick">Agent vocal Callem</p>
+        <h1>Il ne répond pas.<br>Il traite le dossier.</h1>
+        <p class="o-lede">Identité vérifiée, outils appelés, suivi envoyé — puis il rappelle
+          trois jours plus tard, sans qu’on le lui demande.</p>
+        <div class="o-btns"><a href="#">Réserver une démo</a><a class="o" href="#">La plateforme</a></div>
+      </div>
+      <div class="o-c" data-at="1" style="--x1:68%;--y1:20%;--x2:15%;--y2:27%"><div class="o-say"><b>Agent Callem · 00:04</b><p>Je vérifie votre identité, puis votre dossier.</p><span class="o-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span></div></div>
+      <div class="o-c" data-at="2" style="--x1:61%;--y1:33%;--x2:33%;--y2:13%"><div class="o-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Identité vérifiée</div></div>
+      <div class="o-c" data-at="3" style="--x1:68%;--y1:44%;--x2:71%;--y2:14%"><div class="o-pill v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5a4 4 0 0 0 5 5L15 15l-6 6-3-3 6-6Z"/></svg>Dossier&nbsp;#4521 retrouvé</div></div>
+      <div class="o-c" data-at="4" style="--x1:61%;--y1:55%;--x2:81%;--y2:35%"><div class="o-pill v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5M6 8h12v4a6 6 0 0 1-12 0Z"/><path d="M12 18v3"/></svg>Transporteur interrogé</div></div>
+      <div class="o-c" data-at="5" style="--x1:68%;--y1:66%;--x2:79%;--y2:60%"><div class="o-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14a3 3 0 0 1-3 3H9l-5 4V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3Z"/></svg>Suivi envoyé par SMS</div></div>
+      <div class="o-c" data-at="6" style="--x1:61%;--y1:77%;--x2:22%;--y2:48%"><div class="o-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6Z"/></svg>3 outils · 302&nbsp;ms</div></div>
+      <div class="o-c" data-at="7" style="--x1:52%;--y1:88%;--x2:50%;--y2:46%"><div class="o-pill dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Résolu sans humain · 41&nbsp;s</div></div>
+      <div class="o-c" data-at="8" style="--x1:68%;--y1:99%;--x2:47%;--y2:80%"><div class="o-wave"><i style="animation-delay:0ms"></i><i style="animation-delay:70ms"></i><i style="animation-delay:140ms"></i><i style="animation-delay:210ms"></i><i style="animation-delay:280ms"></i><i style="animation-delay:350ms"></i><i style="animation-delay:420ms"></i><i style="animation-delay:490ms"></i><i style="animation-delay:560ms"></i><i style="animation-delay:630ms"></i><i style="animation-delay:700ms"></i><i style="animation-delay:770ms"></i><i style="animation-delay:840ms"></i></div></div>
+      <div class="o-c" data-at="9" style="--x1:61%;--y1:110%;--x2:17%;--y2:66%"><div class="o-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l7 4V6l-7 4Z"/><path d="M18 9a4 4 0 0 1 0 6"/></svg>Proactif · 3 jours plus tard</div></div>
+      <div class="o-c" data-at="10" style="--x1:68%;--y1:121%;--x2:31%;--y2:88%"><div class="o-say"><b>Agent Callem · rappel sortant</b><p>Votre colis est arrivé. Je programme le retour de l’ancien&nbsp;?</p><span class="o-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span></div></div>
+      <div class="o-c" data-at="11" style="--x1:61%;--y1:132%;--x2:74%;--y2:82%"><div class="o-pill g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Retour programmé</div></div>
+      <div class="o-c" data-at="12" style="--x1:68%;--y1:143%;--x2:13%;--y2:13%"><div class="o-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg>eu-west-paris</div></div>
+    </div>
+    <div class="o-out" id="oOut">
+      <p>Ne vous contentez plus de décrocher.<br><em>Traitez le dossier.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ E ══════════════════════════════════════════════════════════════════ -->
+<section class="sc" id="e">
+  <div class="in">
+    <div>
+      <p class="e-kick">Démo jouable</p>
+      <h1>Choisissez l’appel.<br>Regardez-le se résoudre.</h1>
+      <p class="e-lede">Trois dossiers réels, trois secteurs. L’agent vérifie, appelle vos outils,
+        respecte ses garde-fous et clôture — ou transfère avec le contexte.</p>
+      <div class="e-pick">
+        <span>L’appel qui arrive</span>
+        <div class="e-tabs" id="eTabs">
+          <button class="e-tab" type="button" data-k="retail" aria-pressed="true">Commande en retard</button>
+          <button class="e-tab" type="button" data-k="assurance" aria-pressed="false">Déclarer un sinistre</button>
+          <button class="e-tab" type="button" data-k="sante" aria-pressed="false">Prendre un rendez-vous</button>
+        </div>
+        <p class="e-hint">Survolez une ligne « outil » pour voir ce qu’elle a renvoyé ·
+          glissez la barre pour rejouer</p>
+      </div>
+    </div>
+
+    <div class="e-box">
+      <div class="e-head"><s></s>En ligne<em id="eSec">Retail · #4521</em><b id="eClk">00:00</b></div>
+      <div class="e-feed" id="eFeed"></div>
+      <div class="e-foot" id="eBadges"></div>
+      <div class="e-bar">
+        <button class="e-play" id="ePlay" type="button" aria-label="Lecture ou pause"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5h4v15H7zM13 4.5h4v15h-4z"/></svg></button>
+        <span class="e-scrub" id="eScrub"><u><i></i><b></b></u></span>
+        <span id="eDur">00:41</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<script>
+(function(){
+"use strict";
+var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ── A · la console joue l'appel ──────────────────────────────────────── */
+var cons = document.getElementById("cons"), clk = document.getElementById("clk"),
+    lns = [].slice.call(document.querySelectorAll("#lines .ln")), t = 0;
+function tick(){
+  t = t >= 46 ? 0 : t + 1;
+  clk.textContent = "00:" + (t < 10 ? "0" : "") + t;
+  lns.forEach(function(l){ l.classList.toggle("on", t >= +l.getAttribute("data-at")); });
+  cons.classList.toggle("go", t >= 10);
+}
+if (!RM){ setInterval(tick, 250); } else { t = 45; tick(); }
+tick();
+
+/* ── C · l'onde est un instrument : elle suit l'appel ─────────────────── */
+var wv = document.getElementById("wave"), N = 88, bars = [];
+for (var i = 0; i < N; i++){ var b = document.createElement("i"); wv.appendChild(b); bars.push(b); }
+var cclk = document.getElementById("cclk"), cstep = document.getElementById("cstep"),
+    STEPS = ["l’appel entre","l’IA comprend","l’outil agit","résolu, en France"],
+    ct = 0, ph = 0;
+function draw(){
+  ph += .085;
+  var k = ct / 46, act = k < .2 ? 0 : k < .45 ? 1 : k < .8 ? 2 : 3,
+      amp = [.34, .58, 1, .42][act];
+  for (var i = 0; i < N; i++){
+    var x = i / N,
+        v = Math.sin(x * 13 + ph) * .5 + Math.sin(x * 29 - ph * 1.6) * .3
+          + Math.sin(x * 47 + ph * .7) * .2;
+    var h = 8 + Math.abs(v) * 78 * amp * (0.55 + 0.45 * Math.sin(x * Math.PI));
+    bars[i].style.height = h.toFixed(1) + "%";
+    bars[i].classList.toggle("hot", act === 2 && h > 46);
+  }
+  cstep.textContent = STEPS[act];
+}
+function ctick(){
+  ct = ct >= 46 ? 0 : ct + 1;
+  cclk.textContent = "00:" + (ct < 10 ? "0" : "") + ct;
+}
+if (!RM){
+  setInterval(ctick, 250);
+  (function loop(){ requestAnimationFrame(loop); draw(); })();
+} else { draw(); }
+})();
+
+
+/* ── D · trois temps pilotés par le scroll ────────────────────────────── */
+(function(){
+  var sec = document.getElementById("d");
+  if (!sec) return;
+  var pin = document.getElementById("oPin"), out = document.getElementById("oOut"),
+      cds = [].slice.call(sec.querySelectorAll(".o-c")), TOT = 12, last = -1;
+  function follow(){
+    var r = sec.getBoundingClientRect(), span = r.height - innerHeight;
+    var q = span > 0 ? (-r.top) / span : 0;
+    q = q < 0 ? 0 : q > 1 ? 1 : q;
+    var n = Math.round(Math.min(TOT, q / 0.42 * TOT));
+    if (n !== last){ last = n;
+      cds.forEach(function(c){ c.classList.toggle("on", n >= +c.getAttribute("data-at")); }); }
+    pin.classList.toggle("st2", q > 0.44);
+    out.classList.toggle("on", q > 0.86);
+  }
+  addEventListener("scroll", follow, {passive:true});
+  addEventListener("resize", follow);
+  follow();
+})();
+
+/* ── E · la démo jouable ──────────────────────────────────────────────── */
+(function(){
+  var SC = {"retail": {"label": "Commande en retard", "sector": "Retail · #4521", "dur": 41, "ev": [[2, "", "Appelant", "Ma commande #4521 a trois jours de retard.", ""], [6, "me", "Agent", "Je vérifie votre identité, puis votre dossier.", ""], [8, "tool", "Outil", "identity.verify(tel)", "→ correspondance forte · 41 ms"], [11, "tool", "Outil", "crm.get_order(#4521)", "→ statut : réexpédiée le 04/09 · 82 ms"], [16, "tool", "Outil", "carrier.track(FR8842…)", "→ livraison estimée mardi · 179 ms"], [21, "me", "Agent", "Elle est repartie ce matin, livraison mardi. Je vous envoie le suivi.", ""], [26, "tool", "Outil", "sms.send(tracking)", "→ remis · 140 ms"], [41, "ok", "Clôture", "Résolu sans humain", ""]], "badges": [["Identité vérifiée", 8], ["4 outils · 442 ms", 26], ["Résolu · 41 s", 41]]}, "assurance": {"label": "Déclarer un sinistre", "sector": "Assurance · SIN-7731", "dur": 68, "ev": [[3, "", "Appelant", "J'ai eu un accrochage ce matin, je voudrais déclarer.", ""], [7, "me", "Agent", "Je suis un assistant Callem. Je vais vérifier votre contrat.", ""], [10, "tool", "Outil", "identity.verify(tel)", "→ correspondance forte · 38 ms"], [14, "tool", "Outil", "policy.get(contrat)", "→ tous risques · franchise 350 € · 96 ms"], [22, "me", "Agent", "Votre contrat couvre les dommages. Je crée la déclaration.", ""], [30, "tool", "Outil", "claims.create(SIN-7731)", "→ dossier ouvert · 211 ms"], [44, "me", "Agent", "Un expert vous rappelle sous 48 h. Je ne peux pas vous indiquer d'indemnisation.", ""], [52, "tool", "Outil", "human.escalate(expert)", "→ file sinistres · 64 ms"], [68, "ok", "Clôture", "Transféré avec le contexte", ""]], "badges": [["Identité vérifiée", 10], ["Aucun montant annoncé", 44], ["Escalade encadrée", 68]]}, "sante": {"label": "Prendre un rendez-vous", "sector": "Santé · CAB-204", "dur": 52, "ev": [[2, "", "Appelant", "Je voudrais un rendez-vous avec le docteur Meyer.", ""], [6, "me", "Agent", "Bien sûr. Je vérifie ses disponibilités.", ""], [9, "tool", "Outil", "identity.verify(tel)", "→ patient connu · 44 ms"], [13, "tool", "Outil", "agenda.slots(meyer, 7j)", "→ 3 créneaux · 71 ms"], [19, "me", "Agent", "Mardi 14 h, mercredi 9 h 30 ou jeudi 16 h ?", ""], [26, "", "Appelant", "Mercredi matin, c'est parfait.", ""], [31, "tool", "Outil", "agenda.book(mer 09:30)", "→ confirmé · 118 ms"], [38, "me", "Agent", "C'est noté. Je ne donne aucun conseil médical, le cabinet vous rappellera si besoin.", ""], [44, "tool", "Outil", "sms.send(rappel J-1)", "→ programmé · 132 ms"], [52, "ok", "Clôture", "Rendez-vous confirmé", ""]], "badges": [["Identité vérifiée", 9], ["Zéro conseil médical", 38], ["Rappel J-1 programmé", 52]]}};
+  var feed = document.getElementById("eFeed"), bdg = document.getElementById("eBadges"),
+      clk = document.getElementById("eClk"), sect = document.getElementById("eSec"),
+      dur = document.getElementById("eDur"), scrub = document.getElementById("eScrub"),
+      fill = scrub.querySelector("i"), knob = scrub.querySelector("b"),
+      play = document.getElementById("ePlay");
+  if (!feed) return;
+  var ICO_P = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5Z"/></svg>',
+      ICO_S = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5h4v15H7zM13 4.5h4v15h-4z"/></svg>';
+  var key = "retail", t = 0, timer = null, running = false, drag = false;
+
+  function mm(v){ var m = Math.floor(v/60), x = Math.floor(v%60);
+    return (m<10?"0":"")+m+":"+(x<10?"0":"")+x; }
+
+  function esc(x){ return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+  function build(){
+    var d = SC[key];
+    sect.textContent = d.sector;
+    dur.textContent = mm(d.dur);
+    feed.innerHTML = d.ev.map(function(e){
+      return '<div class="e-ev '+e[1]+'" data-at="'+e[0]+'"><i>'+mm(e[0])+'</i><u>'+esc(e[2])+'</u>'
+           + '<span>'+esc(e[3])+(e[4]?'<span class="ret">'+esc(e[4])+'</span>':'')+'</span></div>';
+    }).join("");
+    bdg.innerHTML = d.badges.map(function(b,i){
+      return '<span class="e-badge'+(i===d.badges.length-1?' g':'')+'" data-at="'+b[1]+'">'
+           + esc(b[0])+'</span>';
+    }).join("");
+    t = 0; paint();
+  }
+  function paint(){
+    var d = SC[key];
+    clk.textContent = mm(t);
+    [].forEach.call(feed.children, function(el){
+      el.classList.toggle("on", t >= +el.getAttribute("data-at")); });
+    [].forEach.call(bdg.children, function(el){
+      el.classList.toggle("on", t >= +el.getAttribute("data-at")); });
+    var q = Math.min(1, t / d.dur) * 100;
+    fill.style.width = q + "%"; knob.style.left = q + "%";
+  }
+  function step(){ t = t >= SC[key].dur ? 0 : t + 1; paint(); }
+  function start(){ if (timer) return; timer = setInterval(step, 230); running = true;
+    play.innerHTML = ICO_S; }
+  function stop(){ clearInterval(timer); timer = null; running = false; play.innerHTML = ICO_P; }
+
+  document.getElementById("eTabs").addEventListener("click", function(ev){
+    var b = ev.target.closest(".e-tab"); if (!b) return;
+    [].forEach.call(this.children, function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    key = b.getAttribute("data-k"); build(); stop(); start();
+  });
+  play.addEventListener("click", function(){ running ? stop() : start(); });
+
+  function seek(ev){
+    var r = scrub.getBoundingClientRect(),
+        x = (ev.clientX - r.left) / r.width;
+    t = Math.round(Math.max(0, Math.min(1, x)) * SC[key].dur); paint();
+  }
+  scrub.addEventListener("pointerdown", function(ev){
+    drag = true; stop(); seek(ev); scrub.setPointerCapture(ev.pointerId); });
+  scrub.addEventListener("pointermove", function(ev){ if (drag) seek(ev); });
+  ["pointerup","pointercancel"].forEach(function(k){
+    scrub.addEventListener(k, function(){ drag = false; }); });
+
+  feed.addEventListener("click", function(ev){
+    var l = ev.target.closest(".e-ev.tool"); if (l) l.classList.toggle("open"); });
+
+  build();
+  var seen = false;
+  function watch(){
+    var r = document.getElementById("e").getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight){ if (!seen){ seen = true; start(); } }
+    else stop();
+  }
+  addEventListener("scroll", watch, {passive:true}); watch();
+})();
+</script>
+</body>
+</html>

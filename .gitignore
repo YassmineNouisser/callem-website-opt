@@ -1,4 +1,3 @@
 .DS_Store
-node_modules/
-.vercel
-*.log
+nohup.out
+build/_sauvegarde/
